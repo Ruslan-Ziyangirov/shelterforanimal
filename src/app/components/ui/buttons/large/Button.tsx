@@ -1,4 +1,4 @@
-import shelterForAnimals from "../../../../assets/ShelterForAnimal.svg";
+import shelterForAnimals from "../../../../../assets/ShelterForAnimal.svg";
 import {Link} from "react-router-dom";
 import {FC} from "react";
 import "./Button.sass";

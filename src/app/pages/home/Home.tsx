@@ -1,7 +1,8 @@
-import {Button} from "../../components/ui/buttons/Button";
+import {Button} from "../../components/ui/buttons/large/Button";
 import "./Home.sass";
 import mainImage from "../../../assets/main-image.png"
 import {Footer} from "../../components/footer/Footer";
+import mainImg  from "../../../assets/mainImg.png";
 
 export const Home = () =>{
 
@@ -27,7 +28,7 @@ export const Home = () =>{
 
                 </div>
             </div>
-
+            <img className="main-img" src={mainImg}/>
             <Footer/>
         </div>
 

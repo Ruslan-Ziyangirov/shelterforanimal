@@ -1,5 +1,6 @@
 import {FC} from "react";
 import "./ShelterCard.sass";
+import {Stars} from "../stars/Stars";
 
 
 interface Card{
@@ -32,12 +33,6 @@ export const Icon: FC<Props> = ({ name, height,width}) => {
     );
 }
 
-
-
-
-
-
-
 export const ShelterCard:FC<Card> = ({title,description,address,image}) =>{
     return(
         <div className="card-wrapper">
@@ -62,9 +57,7 @@ export const ShelterCard:FC<Card> = ({title,description,address,image}) =>{
             </div>
 
 
-            <p>
-                звездочки
-            </p>
+            <Stars/>
         </div>
     )
 }
