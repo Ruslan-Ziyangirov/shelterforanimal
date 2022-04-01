@@ -7,8 +7,8 @@ interface Props{
     title: string;
     color: string;
     background: string;
-    border: string;
-    width: string
+    border?: string;
+    width?: string
 }
 
 export const Button:FC<Props> = ({title,color,background,border, width}) =>{

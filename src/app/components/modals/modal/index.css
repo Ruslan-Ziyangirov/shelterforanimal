@@ -1,0 +1,21 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: thin solid rgba(18, 34, 88, 0.12);
+  z-index: 2;
+}
+
+.modal-signIn-wrapper {
+  background: white;
+  border-radius: 24px;
+  width: 480px;
+}
+
+/*# sourceMappingURL=index.css.map */
