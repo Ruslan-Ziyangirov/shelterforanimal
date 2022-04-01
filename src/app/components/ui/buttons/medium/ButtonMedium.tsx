@@ -1,17 +1,19 @@
-import {FC} from "react";
 import "./ButtonMedium.sass"
+import {FC} from "react";
 
 interface Props{
     title: string;
-    border: string;
-    width?: string
+    color: string;
+    background: string;
+    onClick?: () => void;
+    type:any
 }
 
-
-export const ButtonMedium:FC<Props> = ({title,border}) =>{
+export const ButtonMedium:FC<Props> = ({title, color, background, onClick, type}) =>{
     return(
-        <button className="btn-medium" style={{
-            border: `${border}`
+        <button onClick={onClick} type={type} className="btn-for-modal" style={{
+            color: `${color}`,
+            background: `${background}`,
         }}>{title}</button>
     )
 }

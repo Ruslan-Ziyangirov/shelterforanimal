@@ -1,9 +1,18 @@
 import {Link} from "react-router-dom";
 import "./Header.sass";
 import shelterForAnimals from"../../../assets/ShelterForAnimal.svg"
-import {ButtonMedium} from "../ui/buttons/medium/ButtonMedium";
+import {ButtonSmall} from "../ui/buttons/small/ButtonSmall";
+import {observer} from "mobx-react";
+import {useStores} from "../../../utils/use-stores-hook";
+import {SignIn} from "../modals/signIn/SignIn";
 
-export const Header = () => {
+export const Header = observer(() => {
+
+    const {modalStore: { setCurrentModal } } = useStores();
+
+    const onOpenModal = () =>{
+        setCurrentModal(SignIn);
+    }
 
     return(
         <header>
@@ -18,10 +27,8 @@ export const Header = () => {
                         <Link to="/news">Новости</Link>
                     </nav>
                 </div>
-                <ButtonMedium title={"Войти"} border={"1px solid #713EDD"}/>
+                <ButtonSmall title={"Войти"} border={"1px solid #713EDD"} onClick={onOpenModal}/>
             </div>
-
-
         </header>
     )
-}
+})
