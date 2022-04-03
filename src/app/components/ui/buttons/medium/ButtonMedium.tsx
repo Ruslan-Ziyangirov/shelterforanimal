@@ -6,7 +6,8 @@ interface Props{
     color: string;
     background: string;
     onClick?: () => void;
-    type:any
+    type?:any;
+    disabled?: any;
 }
 
 export const ButtonMedium:FC<Props> = ({title, color, background, onClick, type}) =>{

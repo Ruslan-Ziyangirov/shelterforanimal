@@ -6,14 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import mainStore from "./app/stores/mainStore";
 import {ModalConstructor} from "./app/components/modals/modalConstructor";
 import { Provider } from 'mobx-react';
+import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-      <Provider {...mainStore}>
-          <App />
+      <BrowserRouter>
+          <Provider {...mainStore}>
+              <App />
 
-          <ModalConstructor/>
-      </Provider>
+              <ModalConstructor/>
+          </Provider>
+      </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
