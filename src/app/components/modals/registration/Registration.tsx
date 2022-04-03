@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useRef, useState} from "react";
 import {observer} from "mobx-react";
 import {useStores} from "../../../../utils/use-stores-hook";
 import {Field, Form, Formik} from "formik";
@@ -7,6 +7,10 @@ import {Button} from "../../ui/buttons/large/Button";
 import {Modal} from "../modal";
 import {SignIn} from "../signIn/SignIn";
 import {ButtonMedium} from "../../ui/buttons/medium/ButtonMedium";
+import ReactDOM from "react-dom";
+import {Router, useNavigate} from "react-router-dom";
+import {signUp, useAuth} from "../../../config/firebase";
+
 
 interface Props{
     name:string,
@@ -33,25 +37,41 @@ export const Icon: FC<Props> = ({ name, height,width}) => {
 
 
 export const Registration = observer( () =>{
+
+    const [loading, setLoading] = useState(false)
+
+    const user = useAuth();
+
+    const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+    const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+
     const { modalStore: {clearCurrentModal, setCurrentModal} } = useStores();
+
+
+    async function handleSignUp(){
+        setLoading(true)
+        try {
+            await signUp(emailRef.current.value, passwordRef.current.value)
+        } catch(e) {
+            console.log((e as Error).message)
+        }
+        setLoading(false)
+    }
 
     const onSignIn = () =>{
         clearCurrentModal();
         setCurrentModal(SignIn);
     }
 
-
-
-
     return (
         <Modal onClose={clearCurrentModal}>
 
             <Formik initialValues={{
-                partners: "",
+                name: "",
                 email: "",
                 password: ""
             }}
-                    validationSchema={signInScheme}
+
                     onSubmit={values => {
                         alert(values);
                     }}
@@ -59,7 +79,7 @@ export const Registration = observer( () =>{
                 {({errors,touched}) =>(
                     <div className="elements-wrapper">
                         <div className="title-btn-wrapper">
-                            <h3>Вход</h3>
+                            <h3>Регистрация</h3>
                             <button className="btn-close" onClick={clearCurrentModal}>
                                 <Icon name="close-btn" height="20" width="20"/>
                             </button>
@@ -67,30 +87,33 @@ export const Registration = observer( () =>{
                         <div className="form-wrapper">
                             <Form>
 
-                                <Field name="partners" placeholder="Имя"/>
-                                {errors.partners && touched.partners ? (
-                                    <p className="error">{errors.partners}</p>
-                                ) : null}
+                                <input name="name"
+                                       placeholder="Имя"
+                                       />
 
-                                <Field   name="email" placeholder="Email" />
 
-                                {errors.email && touched.email ? (
-                                    <p className="error">{errors.email}</p>
-                                ) : null}
+                                <input   name="email"
+                                         placeholder="Email"
+                                         ref={emailRef}
+                                         />
 
-                                <Field    name="password" placeholder="Пароль"  />
 
-                                {errors.password && touched.password ? (
-                                    <p className="error">{errors.password}</p>
-                                ) : null}
+
+                                <input    name="password"
+                                          placeholder="Пароль"
+                                          ref={passwordRef}
+                                          />
+
 
                             </Form>
 
                             <ButtonMedium
                                 title={"Зарегистрироваться"}
                                 color={"white"}
+                                disabled={loading || user}
                                 background={"#713EDD"}
-                                type={"submit"}
+                                type={"button"}
+                                onClick={handleSignUp}
                             />
 
                         </div>

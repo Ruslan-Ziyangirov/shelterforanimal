@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useRef, useState} from "react";
 import {observer} from "mobx-react";
 import {useStores} from "../../../../utils/use-stores-hook";
 import {Modal} from "../modal";
@@ -8,6 +8,8 @@ import {signInScheme} from "../../../schemas/SchemForValidate";
 import "./SignIn.sass";
 import {ButtonMedium} from "../../ui/buttons/medium/ButtonMedium";
 import {Registration} from "../registration/Registration";
+import {signIn, useAuth} from "../../../config/firebase";
+import {useNavigate} from "react-router-dom";
 
 interface Props{
     name:string,
@@ -41,13 +43,35 @@ export const SignIn = observer( () =>{
         setCurrentModal(Registration);
     }
 
+    const [loading, setLoading] = useState(false)
+    const user = useAuth()
+
+    let router = useNavigate()
+
+
+    const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+    const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+
+
+    async function handleSignIn(){
+        setLoading(true)
+        try {
+            await signIn(emailRef.current.value, passwordRef.current.value);
+            router('/profile')
+            clearCurrentModal()
+        } catch {
+            alert("Error!")
+        }
+        setLoading(false)
+    }
+
 
 
     return (
         <Modal onClose={clearCurrentModal}>
 
             <Formik initialValues={{
-                phone: "",
+                email: "",
                 password: ""
             }}
                     validationSchema={signInScheme}
@@ -66,26 +90,34 @@ export const SignIn = observer( () =>{
                         <div className="form-wrapper">
                             <Form>
 
-                                <Field  name="phone" placeholder="Телефон" />
+                                <input  name="email"
+                                        placeholder="Email"
+                                        ref={emailRef}/>
 
-                                {errors.phone && touched.phone ? (
-                                    <p className="error">{errors.phone}</p>
+                                {errors.email && touched.email ? (
+                                    <p className="error">{errors.email}</p>
                                 ) : null}
 
-                                <Field    name="password" placeholder="Пароль"  />
+                                <input    name="password"
+                                          placeholder="Пароль"
+                                          ref={passwordRef}/>
 
                                 {errors.password && touched.password ? (
                                     <p className="error">{errors.password}</p>
                                 ) : null}
 
-                            </Form>
 
-                            <ButtonMedium
-                                title={"Войти"}
-                                color={"white"}
-                                background={"#713EDD"}
-                                type={"submit"}
-                            />
+
+                                <ButtonMedium
+                                    title={"Войти"}
+                                    color={"white"}
+                                    background={"#713EDD"}
+                                    type={"button"}
+                                    disabled={loading || user}
+                                    onClick={handleSignIn}
+                                />
+
+                            </Form>
                         </div>
                         <div className="link-wrapper">
                             <button className="btn-as-link" onClick={onRegistration}>
