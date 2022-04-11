@@ -39,8 +39,16 @@ export const Icon: FC<Props> = ({ name, height,width}) => {
 export const Registration = observer( () =>{
 
     const [loading, setLoading] = useState(false)
+    const [data, setData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        phone: ''
+    })
+
 
     const user = useAuth();
+
 
     const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>;
     const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -51,12 +59,15 @@ export const Registration = observer( () =>{
     async function handleSignUp(){
         setLoading(true)
         try {
-            await signUp(emailRef.current.value, passwordRef.current.value)
+            await signUp(emailRef.current.value, passwordRef.current.value, data)
+            console.log(data)
         } catch(e) {
             console.log((e as Error).message)
         }
         setLoading(false)
     }
+
+
 
     const onSignIn = () =>{
         clearCurrentModal();
@@ -69,7 +80,9 @@ export const Registration = observer( () =>{
             <Formik initialValues={{
                 name: "",
                 email: "",
-                password: ""
+                password: "",
+                phone:"",
+
             }}
 
                     onSubmit={values => {
@@ -89,20 +102,35 @@ export const Registration = observer( () =>{
 
                                 <input name="name"
                                        placeholder="Имя"
+                                       value={data.name}
+                                       onChange={(e: any) => setData({...data, name: e.target.value})}
+
                                        />
 
 
                                 <input   name="email"
                                          placeholder="Email"
                                          ref={emailRef}
+                                         value={data.email}
+                                         onChange={(e: any) => setData({...data, email: e.target.value})}
+
                                          />
-
-
 
                                 <input    name="password"
                                           placeholder="Пароль"
                                           ref={passwordRef}
+                                          value={data.password}
+                                          onChange={(e: any) => setData({...data, password: e.target.value})}
+
                                           />
+
+                                <input    name="phone"
+                                          placeholder="Телефон"
+                                          value={data.phone}
+                                          onChange={(e: any) => setData({...data, phone: e.target.value})}
+
+
+                                />
 
 
                             </Form>

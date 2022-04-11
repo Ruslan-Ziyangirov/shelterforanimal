@@ -3,16 +3,18 @@ import "./ButtonSmall.sass"
 
 interface Props{
     title: string;
-    border: string;
+    border?: string;
     width?: string;
     onClick?: any;
+    disabled?: any;
 }
 
 
-export const ButtonSmall:FC<Props> = ({title,border, onClick}) =>{
+export const ButtonSmall:FC<Props> = ({title,border, onClick, disabled, width}) =>{
     return(
-        <button className="btn-medium" style={{
-            border: `${border}`
+        <button disabled={disabled} className="btn-medium" style={{
+            border: `${border}`,
+            width: `${width}`
         }} onClick={onClick}>{title}</button>
     )
 }

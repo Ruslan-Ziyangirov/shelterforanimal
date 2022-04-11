@@ -9,4 +9,8 @@
   cursor: pointer;
 }
 
+.btn-for-modal:hover {
+  border: 3px solid #E0E0E0;
+}
+
 /*# sourceMappingURL=ButtonMedium.css.map */
