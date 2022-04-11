@@ -5,10 +5,13 @@ import {ButtonSmall} from "../ui/buttons/small/ButtonSmall";
 import {observer} from "mobx-react";
 import {useStores} from "../../../utils/use-stores-hook";
 import {SignIn} from "../modals/signIn/SignIn";
+import {useAuth} from "../../config/firebase";
 
 export const Header = observer(() => {
 
     const {modalStore: { setCurrentModal } } = useStores();
+
+    const user = useAuth();
 
     const onOpenModal = () =>{
         setCurrentModal(SignIn);
@@ -27,6 +30,7 @@ export const Header = observer(() => {
                         <Link to="/news">Новости</Link>
                     </nav>
                 </div>
+
                 <ButtonSmall title={"Войти"} border={"1px solid #713EDD"} onClick={onOpenModal}/>
             </div>
         </header>
