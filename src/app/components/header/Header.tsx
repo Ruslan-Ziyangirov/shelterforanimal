@@ -31,7 +31,10 @@ export const Header = observer(() => {
                     </nav>
                 </div>
 
-                <ButtonSmall title={"Войти"} border={"1px solid #713EDD"} onClick={onOpenModal}/>
+                { user ? <Link to="/profile">{user.email}</Link> :
+                    <ButtonSmall title={"Войти"} border={"1px solid #713EDD"} onClick={onOpenModal}/>
+                }
+
             </div>
         </header>
     )
