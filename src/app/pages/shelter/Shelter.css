@@ -1,0 +1,68 @@
+.shelter-body-wrapper {
+  width: 1170px;
+  margin: 0 auto;
+  margin-bottom: 56px;
+}
+.shelter-body-wrapper h2 {
+  margin-top: 96px;
+  font-size: 48px;
+  letter-spacing: -0.03em;
+  margin-left: 51px;
+}
+.shelter-body-wrapper h2 span {
+  color: #713EDD;
+}
+
+.shelter-information-wrapper {
+  background: #EFF1F4;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.shelter-information-wrapper img {
+  width: 446px;
+  height: 295px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  margin-left: 40px;
+}
+
+.information-block {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.information-block h3 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  letter-spacing: -0.03em;
+  color: #0C73FE;
+  margin: 0px;
+}
+.information-block .header-and-stars {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.description-shelter {
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: -0.03em;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 148%;
+}
+
+.place-shelter {
+  display: flex;
+  align-items: center;
+}
+
+.additional-information {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*# sourceMappingURL=Shelter.css.map */

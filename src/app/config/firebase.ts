@@ -14,12 +14,12 @@ import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 import {useEffect, useState} from "react";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAABGzY-znSWrEhpD4EOd_lWpOwZSrscfo",
-    authDomain: "shelter-for-animal.firebaseapp.com",
-    projectId: "shelter-for-animal",
-    storageBucket: "shelter-for-animal.appspot.com",
-    messagingSenderId: "793609760199",
-    appId: "1:793609760199:web:c0fe0c2b2b974c7d1e3de2",
+    apiKey: "AIzaSyDtnxlXITLyZMapzZvle6MxzUDIIQ3xbMw",
+    authDomain: "shelterforanimalnew.firebaseapp.com",
+    projectId: "shelterforanimalnew",
+    storageBucket: "shelterforanimalnew.appspot.com",
+    messagingSenderId: "941478700876",
+    appId: "1:941478700876:web:ef5fcb7bc96f232aee51e9"
 };
 
 // Initialize Firebase
@@ -38,6 +38,7 @@ export function signUp(email:any,  password:any, userData?:any){
                 name: userData.name,
                 email: userData.email,
                 phone: userData.phone,
+                photoURL: "https://i02.fotocdn.net/s121/fced1b9cb79eecf2/user_xl/2762630212.jpg",
             })
                 .then(res => console.log(res));
         })
@@ -62,15 +63,4 @@ export function useAuth(){
     return currentUser;
 }
 
-export async function upload(file:any, currentUser:any, setLoading:any){
-    const fileRef = ref(storage, currentUser.uid + '.png')
-    setLoading(true)
-    const snapshot = await uploadBytes(fileRef, file)
-    const photoURL = await getDownloadURL(fileRef)
-
-    await updateProfile(currentUser, {photoURL})
-
-    setLoading(false)
-    alert("Uploaded file")
-}
 

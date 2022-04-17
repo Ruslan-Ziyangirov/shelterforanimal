@@ -60,6 +60,7 @@ export const Registration = observer( () =>{
         setLoading(true)
         try {
             await signUp(emailRef.current.value, passwordRef.current.value, data)
+            clearCurrentModal()
             console.log(data)
         } catch(e) {
             console.log((e as Error).message)
