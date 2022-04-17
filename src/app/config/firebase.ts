@@ -28,6 +28,9 @@ const auth = getAuth(app)
 const storage = getStorage()
 export const database = getFirestore(app);
 const usersDatabaseRef = collection(database, 'profile');
+const historyDatabaseRef = collection(database, 'history');
+
+
 
 
 export function signUp(email:any,  password:any, userData?:any){
@@ -43,6 +46,9 @@ export function signUp(email:any,  password:any, userData?:any){
                 .then(res => console.log(res));
         })
 }
+
+
+
 
 export function signIn(email:any, password:any){
     return signInWithEmailAndPassword(auth, email, password);
@@ -61,6 +67,20 @@ export function useAuth(){
     },[])
 
     return currentUser;
+}
+
+
+
+export async function uploadUserPhoto(file:any, currentUser:any, setLoading:any){
+    const fileRef = ref(storage, currentUser.uid + '.png')
+    setLoading(true)
+    const snapshot = await uploadBytes(fileRef, file)
+    const photoURL = await getDownloadURL(fileRef)
+
+    await updateProfile(currentUser, {photoURL})
+
+    setLoading(false)
+    alert("Uploaded file")
 }
 
 
