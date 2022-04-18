@@ -33,6 +33,7 @@ const historyDatabaseRef = collection(database, 'history');
 
 
 
+
 export function signUp(email:any,  password:any, userData?:any){
     return createUserWithEmailAndPassword(auth, email, password)
         .then((registeredUser) => {

@@ -34,6 +34,10 @@ export const Profile = observer(() =>{
         setCurrentModal(WriteHistory);
     }
 
+    // const onOpenModal = () =>{
+    //     setCurrentModal(<WriteHistory onSuccess={() => } />);
+    // }
+
     async function handleLogout(){
         setLoading(true)
         try {

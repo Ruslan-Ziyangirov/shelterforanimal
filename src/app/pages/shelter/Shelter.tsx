@@ -1,8 +1,10 @@
 import {Stars} from "../../components/stars/Stars";
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import "./Shelter.sass"
 import shelterImg from "../../../assets/spec house.png";
 import {Footer} from "../../components/footer/Footer";
+import {collection, getDocs} from "firebase/firestore";
+import {database} from "../../config/firebase";
 
 interface Props{
     name:string,
@@ -29,6 +31,8 @@ export const Icon: FC<Props> = ({ name, height,width}) => {
 
 
 export const Shelter = () =>{
+
+
     return(
         <>
         <div className="shelter-body-wrapper">
