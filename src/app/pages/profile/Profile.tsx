@@ -34,6 +34,10 @@ export const Profile = observer(() =>{
         setCurrentModal(WriteHistory);
     }
 
+    // const onOpenModal = () =>{
+    //     setCurrentModal(<WriteHistory onSuccess={() => } />);
+    // }
+
     async function handleLogout(){
         setLoading(true)
         try {
@@ -102,7 +106,6 @@ export const Profile = observer(() =>{
                         <p>
                             {usersInfo.phone}
                         </p>
-                        q
                         <p>
                             {usersInfo.email}
                         </p>

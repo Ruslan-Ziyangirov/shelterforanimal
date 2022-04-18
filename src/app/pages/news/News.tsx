@@ -42,7 +42,7 @@ export const News = () => {
                                 <NewsCard title={newInfo.title}
                                           description={newInfo.description}
                                           date={newInfo.date}
-                                          image={""}/>
+                                          image={newInfo.image}/>
                             )
                         )}
                     </div>

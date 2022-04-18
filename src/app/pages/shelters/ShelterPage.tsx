@@ -40,7 +40,7 @@ export const ShelterPage = () =>{
                             <ShelterCard title={shelter.title}
                                          description={shelter.description}
                                          address={shelter.address}
-                                         image={""}/>
+                                         image={shelter.image}/>
                         )
                     )}
                 </div>
