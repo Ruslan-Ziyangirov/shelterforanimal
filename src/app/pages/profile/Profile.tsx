@@ -102,6 +102,7 @@ export const Profile = observer(() =>{
                         <p>
                             {usersInfo.phone}
                         </p>
+                        q
                         <p>
                             {usersInfo.email}
                         </p>
