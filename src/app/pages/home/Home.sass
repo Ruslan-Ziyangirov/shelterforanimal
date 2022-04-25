@@ -1,18 +1,20 @@
 .home-page-body
   position: relative
-  overflow: hidden
+  min-height: 100%
 
 .main-information-wrapper
   width: 1170px
-  margin: 0 auto 115px
+  margin: 40px auto
+  display: flex
+  align-items: center
+  justify-content: space-between
 
   h1
     font-weight: 700
     font-size: 56px
     line-height: 95%
     letter-spacing: -0.03em
-    margin-top: 150px
-    color: rgba(0, 0, 0, 0.8)
+    color: #19063D
 
     span
       color: #EDB507
@@ -25,11 +27,6 @@
     margin-top: 32px
     margin-bottom: 32px
 
-.main-img
-  position: absolute
-  left: 690px
-  bottom: 70px
-  z-index: -10
 
 
 .main-btns-wrapper
@@ -50,6 +47,8 @@
     border: 0px
     background: #713EDD
     color: white
+    cursor: pointer
+    transition: 400ms
 
   .btn-help:hover
     box-shadow: 0px 30px 40px rgba(113, 62, 221, 0.2)
@@ -60,9 +59,12 @@
     background: transparent
     border: 1px solid #EDB507
     color: #4D4D4D
+    cursor: pointer
+    transition: 400ms
 
   .btn-discover:hover
     margin-top: -15px
     background: #EDB507
+    box-shadow: 0px 30px 40px rgb(215, 215, 38, 0.2)
     color: white
     transition: 400ms

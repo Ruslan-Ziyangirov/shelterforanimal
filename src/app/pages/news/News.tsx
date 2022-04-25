@@ -1,8 +1,8 @@
 import dogShelter from "../../../assets/dog shelter.png";
-import {ShelterCard} from "../../components/shelterCard/ShelterCard";
+import {ShelterCard} from "../../components/cards/shelterCard/ShelterCard";
 import specHouse from "../../../assets/spec house.png";
 import {Footer} from "../../components/footer/Footer";
-import {NewsCard} from "../../components/newsCard/NewsCard";
+import {NewsCard} from "../../components/cards/newsCard/NewsCard";
 import news1 from "../../../assets/news1.png"
 import "./News.sass";
 import {collection, getDocs} from "firebase/firestore";
@@ -15,15 +15,13 @@ export const News = () => {
     const [newsInfo, setNewInfo] = useState<any>([]);
 
     useEffect(() => {
-
         const getNewsInfo = async () => {
             const data = await getDocs(newsDatabaseRef);
             let arr = data.docs.map((doc) => ({...doc.data()}));
-            console.log(newsInfo);
             setNewInfo(arr);
         };
-        getNewsInfo().then(err => console.log(err));
-    })
+        getNewsInfo().then();
+    },[])
 
     return (
         <div>
@@ -34,10 +32,6 @@ export const News = () => {
                     </h2>
 
                     <div className="news-list">
-                        <NewsCard title={"Зооволонтеры в наше время: кто бескорыстно борется за жизнь животных"}
-                                  description={"Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint." +
-                                      " Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet."}
-                                  date={"30 июля 2018"} image={news1}/>
                         {newsInfo.map((newInfo: any) => (
                                 <NewsCard title={newInfo.title}
                                           description={newInfo.description}
@@ -47,9 +41,8 @@ export const News = () => {
                         )}
                     </div>
                 </div>
-
-                <Footer/>
             </div>
+            <Footer/>
         </div>
     )
 }
