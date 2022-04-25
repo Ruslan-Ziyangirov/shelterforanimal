@@ -32,9 +32,13 @@ export const Icon: FC<Props> = ({ name, height,width}) => {
     );
 }
 
+interface WriteHistoryModal{
+    onSuccess?: any;
+}
 
 
-export const WriteHistory = observer( () =>{
+
+export const WriteHistory:FC<WriteHistoryModal> = observer( ({onSuccess}) =>{
     const { modalStore: {clearCurrentModal, setCurrentModal} } = useStores();
 
     const [loading, setLoading] = useState(false)
@@ -47,8 +51,6 @@ export const WriteHistory = observer( () =>{
     const currentUser = useAuth();
     const historyDatabaseRef = collection(database, 'history');
 
-
-
     async function writeHistory(){
         setLoading(true)
         try {
@@ -59,8 +61,7 @@ export const WriteHistory = observer( () =>{
                     count: data.count
 
                 }).then(res => console.log(res));
-            clearCurrentModal()
-            console.log(data)
+            clearCurrentModal();
         } catch(e) {
             console.log((e as Error).message)
         }

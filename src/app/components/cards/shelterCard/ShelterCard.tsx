@@ -1,6 +1,6 @@
 import {FC} from "react";
 import "./ShelterCard.sass";
-import {Stars} from "../stars/Stars";
+import {Stars} from "../../stars/Stars";
 
 
 interface Card{
@@ -37,7 +37,7 @@ export const ShelterCard:FC<Card> = ({title,description,address,image}) =>{
     return(
         <div className="card-wrapper">
             <div className="image-description">
-                <img src={image}/>
+                <img src={image} alt="Здесь должно быть фото милого животного :)"/>
 
                 <div className="information-card">
                     <h3>
