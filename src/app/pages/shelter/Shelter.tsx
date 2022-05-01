@@ -7,9 +7,12 @@ import {collection, getDocs} from "firebase/firestore";
 import {database} from "../../config/firebase";
 import {MobXProviderContext, observer} from "mobx-react";
 import {useStores} from "../../../utils/use-stores-hook";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {MainStore} from "../../stores/mainStore";
 import {ShelterModel} from "../../model/ShelterModel";
+import {ButtonMedium} from "../../components/ui/buttons/medium/ButtonMedium";
+import {WriteHistory} from "../../components/modals/writeHistory/WriteHistory";
+import inst from "../../../assets/instagram-icon.png";
 
 interface Props{
     name:string,
@@ -36,16 +39,39 @@ export const Icon: FC<Props> = ({ name, height,width}) => {
 
 export const Shelter = observer(() =>{
 
-
-    const {shelterStore: {sheltersMock}} = useStores();
+    const sheltersDatabaseRef = collection(database, 'shelters');
+    const {modalStore: { setCurrentModal } } = useStores();
+    const [sheltersInfo, setShelterInfo] = useState<any>([]);
     const [shelterInformation, setShelterInformation] = useState<ShelterModel>();
     const {id}: Readonly<any> = useParams();
+    let router = useNavigate()
+
+    useEffect(()=>{
+        const getSheltersList = async () =>{
+            const data = await getDocs(sheltersDatabaseRef);
+            let arr = data.docs.map((doc) => ({...doc.data()}))
+            setShelterInfo(arr)
+            console.log(arr)
+        };
+        getSheltersList().then();
+    },[])
+
 
     useEffect(() => {
-        const shelter = sheltersMock.find((shelter:any) => shelter.id === +id);
+        const shelter = sheltersInfo.find((shelter:any) => shelter.id === +id);
 
         setShelterInformation(shelter);
-    }, [id, sheltersMock]);
+    }, [id, sheltersInfo]);
+
+
+
+    const onOpenModal = () =>{
+        setCurrentModal(WriteHistory);
+    }
+
+    const onComeBack = () =>{
+        router('/shelters')
+    }
 
 
     return(
@@ -57,7 +83,13 @@ export const Shelter = observer(() =>{
                 </h2>
 
                 <div className="shelter-information-wrapper">
-                    <img src={shelterInformation.image}/>
+                    <div className="img-and-back">
+                        <button className="btn-back" onClick={onComeBack}>
+                            <Icon name={"arrow-back"} height={25} width={25}/>
+                        </button>
+                        <img src={shelterInformation.image}/>
+                    </div>
+
 
                     <div className="information-block">
                         <div className="header-and-stars">
@@ -69,24 +101,26 @@ export const Shelter = observer(() =>{
                         <p className="description-shelter">
                             {shelterInformation.description}
                         </p>
-                        <div>
+
+                        <div className="additional-information-wrapper">
+                            <button className="submit" onClick={onOpenModal}>
+                                Оставить заявку
+                            </button>
 
                             <div className="additional-information">
                                 <div className="place-shelter">
-                                    <Icon name={"map"} height={16} width={20}/>
                                     <p>
                                         {shelterInformation.address}
                                     </p>
+                                    <Icon name={"map"} height={16} width={20}/>
                                 </div>
 
-                                <div>
+                                <div className="social-media">
                                     <p>
                                         {shelterInformation.phone}
                                     </p>
-                                </div>
-
-                                <div>
                                     <Icon name={"vk"} height={24} width={24}/>
+                                    <img src={inst} className="inst"/>
                                 </div>
                             </div>
                         </div>
