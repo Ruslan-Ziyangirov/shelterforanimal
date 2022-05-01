@@ -45,7 +45,7 @@ export const WriteHistory:FC<WriteHistoryModal> = observer( ({onSuccess}) =>{
     const [data, setData] = useState({
         title: '',
         date: '',
-        count: ''
+        time: ''
     })
 
     const currentUser = useAuth();
@@ -58,7 +58,7 @@ export const WriteHistory:FC<WriteHistoryModal> = observer( ({onSuccess}) =>{
                     uid: currentUser.uid,
                     title: data.title,
                     date: data.date,
-                    count: data.count
+                    count: data.time
 
                 }).then(res => console.log(res));
             clearCurrentModal();
@@ -72,9 +72,8 @@ export const WriteHistory:FC<WriteHistoryModal> = observer( ({onSuccess}) =>{
         <Modal onClose={clearCurrentModal}>
 
             <Formik initialValues={{
-                title: "",
                 date: "",
-                count: "",
+                time: "",
             }}
                     onSubmit={values => {
                         alert(values);
@@ -90,17 +89,6 @@ export const WriteHistory:FC<WriteHistoryModal> = observer( ({onSuccess}) =>{
                         </div>
                         <div className="form-wrapper">
                             <Form>
-
-                                <input  name="title"
-                                        placeholder="Название"
-                                        value={data.title}
-                                        onChange={(e: any) => setData({...data, title: e.target.value})}
-                                        />
-
-                                {errors.title && touched.title ? (
-                                    <p className="error">{errors.title}</p>
-                                ) : null}
-
                                 <input    name="date"
                                           placeholder="Дата"
                                           value={data.date}
@@ -111,18 +99,17 @@ export const WriteHistory:FC<WriteHistoryModal> = observer( ({onSuccess}) =>{
                                     <p className="error">{errors.date}</p>
                                 ) : null}
 
-                                <input    name="count"
-                                          placeholder="Сумма пожертвований"
-                                          value={data.count}
-                                          onChange={(e: any) => setData({...data, count: e.target.value})}
+                                <input    name="time"
+                                          placeholder="Время"
+                                          value={data.time}
+                                          onChange={(e: any) => setData({...data, time: e.target.value})}
                                 />
 
-                                {errors.count && touched.count ? (
-                                    <p className="error">{errors.count}</p>
+                                {errors.time && touched.time ? (
+                                    <p className="error">{errors.time}</p>
                                 ) : null}
-
                                 <ButtonMedium
-                                    title={"Добавить запись"}
+                                    title={"Оставить заявку"}
                                     color={"white"}
                                     background={"#713EDD"}
                                     type={"button"}

@@ -13,7 +13,6 @@ ReactDOM.render(
       <BrowserRouter>
           <Provider {...mainStore}>
               <App />
-
               <ModalConstructor/>
           </Provider>
       </BrowserRouter>

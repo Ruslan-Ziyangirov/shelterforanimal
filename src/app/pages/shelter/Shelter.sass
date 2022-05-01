@@ -19,14 +19,26 @@
   align-items: center
   justify-content: space-between
 
+.img-and-back
+  position: relative
+  margin-top: 60px
+  margin-bottom: 60px
+  margin-left: 40px
 
+  .btn-back
+    padding: 15px 18px
+    background: white
+    border: 0px
+    border-radius: 20px 0px 0px 0px
+    cursor: pointer
+    position: absolute
 
   img
     width: 446px
     height: 295px
-    margin-top: 60px
-    margin-bottom: 60px
-    margin-left: 40px
+    border-radius: 22px
+
+
 
 .information-block
   margin-left: 40px
@@ -37,7 +49,7 @@
     font-weight: 700
     font-size: 40px
     letter-spacing: -0.03em
-    color: #0C73FE
+    color: #713EDD
     margin: 0px
 
   .header-and-stars
@@ -45,21 +57,73 @@
     align-items: center
     justify-content: space-between
 
+    h3
+      font-size: 40px
+      font-weight: 700
+      letter-spacing: -0.03em
+
 .description-shelter
   font-weight: 400
   font-size: 18px
   letter-spacing: -0.03em
   color: rgba(0, 0, 0, 0.7)
   line-height: 148%
+  margin: 40px 0px
 
-.place-shelter
-  display: flex
-  align-items: center
 
-.additional-information
+.additional-information-wrapper
   display: flex
   align-items: center
   justify-content: space-between
 
+
+.additional-information
+
+
+  .place-shelter
+    display: flex
+    align-items: center
+    margin-bottom: 16px
+
+    p
+      margin-right: 16px
+      margin-top: 0px
+      margin-bottom: 0px
+
+  p
+    font-size: 14px
+
+  .inst
+    width: 24px
+    height: 24px
+    margin: 0px 0px 0px 22px
+
+  .social-media
+    display: flex
+    align-items: center
+    justify-content: end
+
+    p
+      margin-right: 22px
+      margin-top: 0px
+      margin-bottom: 0px
+
+.submit
+  height: 56px
+  margin: 0px
+  border: 0px
+  border-radius: 50px
+  font-weight: 500
+  font-size: 16px
+  cursor: pointer
+  background: #713EDD
+  color: white
+  padding: 19px 55px
+  transition: 400ms
+
+.submit:hover
+  box-shadow: 0px 30px 40px rgba(113, 62, 221, 0.2)
+  margin-top: -15px
+  transition: 400ms
 
 

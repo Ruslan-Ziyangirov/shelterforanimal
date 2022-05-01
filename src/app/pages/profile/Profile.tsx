@@ -38,7 +38,7 @@ export const Profile = observer(() =>{
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            uid = user.uid;
+             uid = user.uid;
         } else {
             console.log("Пользователь почему-то не авторизован")
         }
@@ -85,17 +85,17 @@ export const Profile = observer(() =>{
         getUserInfo().then();
     }, [])
 
+    const getHistoryInfo = async () =>{
+        const data = await getDocs(historyDatabaseRef);
+        let arr = data.docs.map((doc) => ({...doc.data()}))
+        let history = arr.filter(function (history,index){
+            return history.uid === uid
+        })
+        setVisitHistory(history)
+    };
 
     useEffect(() => {
-        const getHistoryInfo = async () =>{
-            const data = await getDocs(historyDatabaseRef);
-            let arr = data.docs.map((doc) => ({...doc.data()}))
-            let history = arr.filter(function (history,index){
-                return history.uid === uid
-            })
-            setVisitHistory(history)
-        };
-        getHistoryInfo().then()
+        getHistoryInfo();
     },[])
 
     return(
@@ -127,15 +127,12 @@ export const Profile = observer(() =>{
                     </div>
 
                      <div className="visit-history-wrapper">
-                        <h4>История</h4>
+                        <h4>История посещений</h4>
                          {visitHistory.map((visit:any) =>(
                              <VisitCard title={visit.title} date={visit.date} count={visit.count}/>
                              )
                          )}
-                         <ButtonMedium title={"Добавить запись"}
-                                       color={"white"}
-                                       background={"#713EDD"}
-                                        onClick={onOpenModal}/>
+
                     </div>
                 </div>
         </div>

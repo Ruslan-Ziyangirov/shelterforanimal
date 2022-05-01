@@ -1,10 +1,11 @@
 import {makeObservable, observable} from 'mobx';
 import {ShelterModel} from "../model/ShelterModel";
 import photo from "../../assets/spec house.png";
-
+import {getDocs} from "firebase/firestore";
 
 
 export class SheltersStore {
+
 
 
     @observable sheltersMock: Array<ShelterModel> = [
