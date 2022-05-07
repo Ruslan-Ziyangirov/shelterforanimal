@@ -4,11 +4,11 @@ import {FC} from "react";
 interface History{
     title: string;
     date: string
-    count: string
+    time: string
 }
 
 
-export const VisitCard:FC<History> = ({title,count,date}) =>{
+export const VisitCard:FC<History> = ({title,time,date}) =>{
     return(
         <div className="visit-card-wrapper">
                 <div>
@@ -22,8 +22,8 @@ export const VisitCard:FC<History> = ({title,count,date}) =>{
                 </div>
 
                 <div className="charity">
-                    <h5>Сумма пожертвования</h5>
-                    <p>{count} ₽</p>
+                    <h5>Время</h5>
+                    <p>{time}</p>
                 </div>
         </div>
     )

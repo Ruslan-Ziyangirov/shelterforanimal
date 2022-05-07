@@ -10,12 +10,12 @@ import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-      <BrowserRouter>
-          <Provider {...mainStore}>
-              <App />
-              <ModalConstructor/>
-          </Provider>
-      </BrowserRouter>
+      <Provider {...mainStore}>
+          <BrowserRouter>
+                  <App />
+                  <ModalConstructor/>
+          </BrowserRouter>
+      </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,8 +1,7 @@
-import {FC, useRef, useState} from "react";
+import React, {FC, useRef, useState} from "react";
 import {observer} from "mobx-react";
 import {useStores} from "../../../../utils/use-stores-hook";
-import {Field, Form, Formik} from "formik";
-import {signInScheme} from "../../../schemas/SchemForValidate";
+import {Field, Form, Formik, FormikValues} from "formik";
 import {Button} from "../../ui/buttons/large/Button";
 import {Modal} from "../modal";
 import {SignIn} from "../signIn/SignIn";
@@ -10,6 +9,7 @@ import {ButtonMedium} from "../../ui/buttons/medium/ButtonMedium";
 import ReactDOM from "react-dom";
 import {Router, useNavigate} from "react-router-dom";
 import {signUp, useAuth} from "../../../config/firebase";
+import * as Yup from "yup";
 
 
 interface Props{
@@ -39,35 +39,45 @@ export const Icon: FC<Props> = ({ name, height,width}) => {
 export const Registration = observer( () =>{
 
     const [loading, setLoading] = useState(false)
-    const [data, setData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        phone: ''
-    })
 
 
     const user = useAuth();
-
-
-    const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-    const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-
     const { modalStore: {clearCurrentModal, setCurrentModal} } = useStores();
 
 
-    async function handleSignUp(){
+    async function handleSignUp(values: FormikValues){
+        console.log(values)
         setLoading(true)
         try {
-            await signUp(emailRef.current.value, passwordRef.current.value, data)
+            await signUp(values.email, values.password, values)
             clearCurrentModal()
-            console.log(data)
         } catch(e) {
             console.log((e as Error).message)
         }
         setLoading(false)
     }
 
+    const schema = Yup.object().shape({
+        password: Yup.string()
+            .required("Пожалуйста,введите пароль")
+            .matches(/^(?=.*[0-9])(?=.*[a-z]).{3,10}$/g,
+                "Пароль должен содержать строчные латинские  буквы, а также цифру")
+            .min(5, "Минимальная длинна пароля - 5 символа"),
+        repassword: Yup.string()
+            .required("Пожалуйста,введите пароль")
+            .matches(/^(?=.*[0-9])(?=.*[a-z]).{3,10}$/g,
+                "Пароль должен содержать строчные латинские  буквы, а также цифру")
+            .min(5, "Минимальная длинна пароля - 5 символа"),
+        email: Yup.string()
+            .required("Пожалуйста,введите почту")
+            .email("Введите действительную почту"),
+        phone: Yup.string()
+            .required("Пожалуйста,введите номер телефона")
+            .matches(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/g,
+                "Неверный формат номера"),
+        name: Yup.string()
+            .required("Пожалуйста,введите имя"),
+    });
 
 
     const onSignIn = () =>{
@@ -82,15 +92,18 @@ export const Registration = observer( () =>{
                 name: "",
                 email: "",
                 password: "",
+                repassword: "",
                 phone:"",
 
             }}
 
                     onSubmit={values => {
-                        alert(values);
+                        console.log(values)
+                        handleSignUp(values);
                     }}
+                    validationSchema={schema}
             >
-                {({errors,touched}) =>(
+                {({errors,touched,handleSubmit,values}) =>(
                     <div className="elements-wrapper">
                         <div className="title-btn-wrapper">
                             <h3>Регистрация</h3>
@@ -99,50 +112,51 @@ export const Registration = observer( () =>{
                             </button>
                         </div>
                         <div className="form-wrapper">
-                            <Form>
+                            <form onSubmit={handleSubmit}>
 
-                                <input name="name"
+                                <Field name="name"
                                        placeholder="Имя"
-                                       value={data.name}
-                                       onChange={(e: any) => setData({...data, name: e.target.value})}
-
                                        />
+                                {errors.name && touched.name ? (
+                                    <p className="error">{errors.name}</p>
+                                ) : null}
 
-
-                                <input   name="email"
+                                <Field   name="email"
                                          placeholder="Email"
-                                         ref={emailRef}
-                                         value={data.email}
-                                         onChange={(e: any) => setData({...data, email: e.target.value})}
-
                                          />
+                                {errors.email && touched.email ? (
+                                    <p className="error">{errors.email}</p>
+                                ) : null}
 
-                                <input    name="password"
+                                <Field    name="password"
                                           placeholder="Пароль"
-                                          ref={passwordRef}
-                                          value={data.password}
-                                          onChange={(e: any) => setData({...data, password: e.target.value})}
-
                                           />
+                                {errors.password && touched.password ? (
+                                    <p className="error">{errors.password}</p>
+                                ) : null}
 
-                                <input    name="phone"
-                                          placeholder="Телефон"
-                                          value={data.phone}
-                                          onChange={(e: any) => setData({...data, phone: e.target.value})}
-
-
+                                <Field    name="repassword"
+                                          placeholder="Повторите пароль"
                                 />
+                                {errors.repassword && touched.repassword ? (
+                                    <p className="error">{errors.repassword}</p>
+                                ) : null}
 
-
-                            </Form>
+                                <Field    name="phone"
+                                          placeholder="Телефон"
+                                />
+                                {errors.phone && touched.phone ? (
+                                    <p className="error">{errors.phone}</p>
+                                ) : null}
+                            </form>
 
                             <ButtonMedium
                                 title={"Зарегистрироваться"}
                                 color={"white"}
-                                disabled={loading || user}
                                 background={"#713EDD"}
-                                type={"button"}
-                                onClick={handleSignUp}
+                                type={"submit"}
+                                disabled={loading || user}
+                                onClick={handleSubmit}
                             />
 
                         </div>

@@ -1,16 +1,13 @@
 import {Stars} from "../../components/stars/Stars";
-import {FC, useContext, useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import "./Shelter.sass"
-import shelterImg from "../../../assets/spec house.png";
 import {Footer} from "../../components/footer/Footer";
 import {collection, getDocs} from "firebase/firestore";
 import {database} from "../../config/firebase";
-import {MobXProviderContext, observer} from "mobx-react";
+import {observer} from "mobx-react";
 import {useStores} from "../../../utils/use-stores-hook";
 import {useNavigate, useParams} from "react-router-dom";
-import {MainStore} from "../../stores/mainStore";
 import {ShelterModel} from "../../model/ShelterModel";
-import {ButtonMedium} from "../../components/ui/buttons/medium/ButtonMedium";
 import {WriteHistory} from "../../components/modals/writeHistory/WriteHistory";
 import inst from "../../../assets/instagram-icon.png";
 
@@ -43,6 +40,7 @@ export const Shelter = observer(() =>{
     const {modalStore: { setCurrentModal } } = useStores();
     const [sheltersInfo, setShelterInfo] = useState<any>([]);
     const [shelterInformation, setShelterInformation] = useState<ShelterModel>();
+    const [showModal, setShowModal] = useState(false);
     const {id}: Readonly<any> = useParams();
     let router = useNavigate()
 
@@ -59,14 +57,11 @@ export const Shelter = observer(() =>{
 
     useEffect(() => {
         const shelter = sheltersInfo.find((shelter:any) => shelter.id === +id);
-
         setShelterInformation(shelter);
     }, [id, sheltersInfo]);
 
-
-
     const onOpenModal = () =>{
-        setCurrentModal(WriteHistory);
+        setShowModal(true);
     }
 
     const onComeBack = () =>{
@@ -130,6 +125,7 @@ export const Shelter = observer(() =>{
             </div>
         }
         <Footer/>
+            {showModal ? <WriteHistory nameShelter={shelterInformation?.title} show={() => setShowModal(false)}/> : null}
         </>
 
     )
