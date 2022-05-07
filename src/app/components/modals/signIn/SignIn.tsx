@@ -1,15 +1,14 @@
-import {FC, useRef, useState} from "react";
+import React, {FC, useRef, useState} from "react";
 import {observer} from "mobx-react";
 import {useStores} from "../../../../utils/use-stores-hook";
 import {Modal} from "../modal";
-import {Field, Form, Formik} from "formik";
-import {Button} from "../../ui/buttons/large/Button";
-import {signInScheme} from "../../../schemas/SchemForValidate";
+import {Field, Form, Formik, FormikValues} from "formik";
 import "./SignIn.sass";
 import {ButtonMedium} from "../../ui/buttons/medium/ButtonMedium";
 import {Registration} from "../registration/Registration";
 import {signIn, useAuth} from "../../../config/firebase";
 import {useNavigate} from "react-router-dom";
+import * as Yup from "yup";
 
 interface Props{
     name:string,
@@ -44,19 +43,16 @@ export const SignIn = observer( () =>{
     }
 
     const [loading, setLoading] = useState(false)
-    const user = useAuth()
 
+    const user = useAuth()
     let router = useNavigate()
 
 
-    const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-    const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-
-    async function handleSignIn(){
+    async function handleSignIn(values:FormikValues){
         setLoading(true)
         try {
-            await signIn(emailRef.current.value, passwordRef.current.value);
+            await signIn(values.email, values.password);
             router('/profile')
             clearCurrentModal()
         } catch {
@@ -64,6 +60,17 @@ export const SignIn = observer( () =>{
         }
         setLoading(false)
     }
+
+    const signInSchema = Yup.object().shape({
+        email: Yup.string()
+            .required("Пожалуйста,введите почту")
+            .email("Введите действительную почту"),
+        password: Yup.string()
+            .required("Пожалуйста,введите пароль")
+            .matches(/^(?=.*[0-9])(?=.*[a-z]).{3,10}$/g,
+                "Пароль должен содержать строчные латинские  буквы, а также цифру")
+            .min(5, "Минимальная длинна пароля - 5 символа"),
+    });
 
 
 
@@ -74,12 +81,13 @@ export const SignIn = observer( () =>{
                 email: "",
                 password: ""
             }}
-                    validationSchema={signInScheme}
                     onSubmit={values => {
-                        alert(values);
+                        console.log(values)
+                        handleSignIn(values);
                     }}
+                    validationSchema={signInSchema}
             >
-                {({errors,touched}) =>(
+                {({errors,touched,handleSubmit,values}) =>(
                     <div className="elements-wrapper">
                         <div className="title-btn-wrapper">
                             <h3>Вход</h3>
@@ -88,36 +96,33 @@ export const SignIn = observer( () =>{
                             </button>
                         </div>
                         <div className="form-wrapper">
-                            <Form>
-
-                                <input  name="email"
+                            <form onSubmit={handleSubmit}>
+                                <Field  name="email"
                                         placeholder="Email"
-                                        ref={emailRef}/>
+                                        />
 
                                 {errors.email && touched.email ? (
                                     <p className="error">{errors.email}</p>
                                 ) : null}
 
-                                <input    name="password"
+                                <Field    name="password"
                                           placeholder="Пароль"
-                                          ref={passwordRef}/>
+
+                                          />
 
                                 {errors.password && touched.password ? (
                                     <p className="error">{errors.password}</p>
                                 ) : null}
 
-
-
                                 <ButtonMedium
                                     title={"Войти"}
                                     color={"white"}
                                     background={"#713EDD"}
-                                    type={"button"}
+                                    type={"submit"}
                                     disabled={loading || user}
-                                    onClick={handleSignIn}
                                 />
 
-                            </Form>
+                            </form>
                         </div>
                         <div className="link-wrapper">
                             <button className="btn-as-link" onClick={onRegistration}>

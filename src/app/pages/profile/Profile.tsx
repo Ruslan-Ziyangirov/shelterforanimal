@@ -129,7 +129,7 @@ export const Profile = observer(() =>{
                      <div className="visit-history-wrapper">
                         <h4>История посещений</h4>
                          {visitHistory.map((visit:any) =>(
-                             <VisitCard title={visit.title} date={visit.date} count={visit.count}/>
+                             <VisitCard title={visit.title} date={visit.date} time={visit.time}/>
                              )
                          )}
 
