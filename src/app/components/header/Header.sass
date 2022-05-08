@@ -4,7 +4,8 @@ h1,h2,h3,p,span,a,button
   font-family: $font-stack
 
 .header
-  width: 1170px
+  max-width: 1200px
+  width: 100%
   display: flex
   align-items: center
   justify-content: space-between
@@ -51,3 +52,69 @@ h1,h2,h3,p,span,a,button
 
   a:hover
     color:  #19063D
+
+.menu-burger-btn
+  display: none
+
+
+@media screen and (max-width: 1250px)
+  .header
+    max-width: 1100px
+    width: 100%
+
+@media screen and (max-width: 1100px)
+  .header
+    max-width: 900px
+    width: 100%
+
+  .navigation
+    nav
+      a
+        margin-right: 24px
+
+
+@media screen and (max-width: 850px)
+  .header
+    max-width: 750px
+    width: 100%
+
+  .menu-burger-btn
+    display: block
+    background: transparent
+    border: 0px
+    padding: 0px
+    cursor: pointer
+
+    img
+      width: 20px
+      height: 20px
+
+  .profile-header
+    display: none
+
+  .btn-signIn-header
+    display: none
+
+  .navigation
+    visibility: hidden
+    display: none
+
+
+@media screen and (max-width: 730px)
+  .header
+    max-width: 550px
+    width: 100%
+
+@media screen and (max-width: 500px)
+  .header
+    max-width: 400px
+    width: 100%
+
+@media screen and (max-width: 375px)
+  .header
+    width: 343px
+    display: flex
+    align-items: center
+    margin: 0 auto
+    padding: 32px 0px 32px 0px
+    justify-content: space-between

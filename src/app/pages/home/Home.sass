@@ -3,7 +3,8 @@
   min-height: 100%
 
 .main-information-wrapper
-  width: 1170px
+  max-width: 1200px
+  width: 100%
   margin: 40px auto
   display: flex
   align-items: center
@@ -26,6 +27,7 @@
     color: rgba(0, 0, 0, 0.7)
     margin-top: 32px
     margin-bottom: 32px
+
 
 
 
@@ -68,3 +70,100 @@
     box-shadow: 0px 30px 40px rgb(215, 215, 38, 0.2)
     color: white
     transition: 400ms
+
+
+
+
+
+@media screen and (max-width: 1250px)
+  .main-information-wrapper
+    max-width: 1100px
+    width: 100%
+
+
+
+@media screen and (max-width: 1100px)
+  .main-information-wrapper
+    max-width: 900px
+    width: 100%
+
+    h1
+      font-size: 40px
+
+    p
+      font-size: 16px
+      margin-top: 32px
+      margin-bottom: 32px
+
+    .main-img
+      width: 500px
+
+
+  .main-btns-wrapper
+    display: flex
+    align-items: center
+
+    .btn-help
+      font-size: 15px
+      margin-right: 12px
+
+    .btn-discover
+      font-size: 15px
+
+
+@media screen and (max-width: 850px)
+  .main-information-wrapper
+    max-width: 750px
+    width: 100%
+    margin-top: 64px
+
+    h1
+      font-size: 36px
+
+    p
+      font-size: 16px
+      margin-top: 28px
+      margin-bottom: 28px
+
+    button
+      padding: 23px 40px
+
+    .main-img
+      width: 380px
+      height: 330px
+
+
+
+
+@media screen and (max-width: 730px)
+  .main-information-wrapper
+    max-width: 550px
+    width: 100%
+    text-align: center
+
+    .main-btns-wrapper
+      display: block
+      margin: 0 auto
+
+    .heading-description-btn
+      margin: 40px auto 0
+
+    h1
+      font-size: 36px
+
+    p
+      font-size: 16px
+      margin-top: 28px
+      margin-bottom: 28px
+
+    .main-img
+      display: none
+
+
+
+@media screen and (max-width: 500px)
+  .main-information-wrapper
+    max-width: 400px
+    width: 100%
+
+@media screen and (max-width: 375px)
