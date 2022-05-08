@@ -7,7 +7,9 @@ import {useStores} from "../../../utils/use-stores-hook";
 import {SignIn} from "../modals/signIn/SignIn";
 import {useAuth} from "../../config/firebase";
 import {FC} from "react";
-import profile from "../../../assets/user.png"
+import profile from "../../../assets/user.png";
+import menuBurger from "../../../svg-icons/menu-burger.svg";
+import {MenuBurger} from "../modals/menuBurger/MenuBurger";
 
 
 interface Props{
@@ -42,6 +44,10 @@ export const Header = observer(() => {
     const onOpenModal = () =>{
         setCurrentModal(SignIn);
     }
+    
+    const onOpenMenuBurger = () => {
+        setCurrentModal(MenuBurger);
+    }
 
     return(
         <header>
@@ -60,12 +66,22 @@ export const Header = observer(() => {
                     </nav>
                 </div>
 
-                { user ? <div className="profile-header">
-                            <img src={profile}/>
-                            <Link to="/profile">{user.email}</Link>
-                        </div> :
-                        <ButtonSmall title={"Войти"} border={"1px solid #713EDD"} onClick={onOpenModal} />
-                }
+                    {
+                        user ? <div className="profile-header">
+                                <img src={profile}/>
+                                <Link to="/profile">{user.email}</Link>
+                            </div> :
+                            <div className="btn-signIn-header">
+                                <ButtonSmall title={"Войти"} border={"1px solid #713EDD"} onClick={onOpenModal} />
+                            </div>
+
+                    }
+
+
+
+                <button className="menu-burger-btn" onClick={onOpenMenuBurger} >
+                    <img src={menuBurger} alt={"меню"}/>
+                </button>
 
             </div>
         </header>
