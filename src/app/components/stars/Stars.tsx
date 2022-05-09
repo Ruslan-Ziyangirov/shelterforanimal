@@ -1,4 +1,5 @@
 import {FC} from "react";
+import "./Stars.sass"
 
 interface Props{
     name:string,

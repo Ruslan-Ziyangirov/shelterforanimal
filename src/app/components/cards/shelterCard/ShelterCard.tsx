@@ -40,9 +40,12 @@ export const ShelterCard:FC<Card> = ({title,description,address,image}) =>{
                 <img src={image} alt="Здесь должно быть фото милого животного :)"/>
 
                 <div className="information-card">
-                    <h3>
-                        {title}
-                    </h3>
+                    <div className="header-card">
+                        <h3>
+                            {title}
+                        </h3>
+                        <Stars/>
+                    </div>
 
                     <p>
                         {description}
@@ -54,10 +57,18 @@ export const ShelterCard:FC<Card> = ({title,description,address,image}) =>{
                         <p>{address}</p>
                     </div>
                 </div>
+
+                <div className="mobile-description">
+                    <h3 className="mobile-title">
+                        {title}
+                    </h3>
+
+                    <div className="arrow-go">
+                        <Icon name="arrow-go" height="25" width="25"/>
+                    </div>
+                </div>
             </div>
 
-
-            <Stars/>
         </div>
     )
 }

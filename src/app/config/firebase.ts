@@ -74,15 +74,18 @@ export function useAuth(){
 
 
 export async function uploadUserPhoto(file:any, currentUser:any, setLoading:any){
+    console.log(file)
     const fileRef = ref(storage, currentUser.uid + '.png')
+    console.log(fileRef)
     setLoading(true)
     const snapshot = await uploadBytes(fileRef, file)
     const photoURL = await getDownloadURL(fileRef)
+    console.log("FFF, " + snapshot+" s " +photoURL)
 
     await updateProfile(currentUser, {photoURL})
 
+
     setLoading(false)
-    alert("Uploaded file")
 }
 
 

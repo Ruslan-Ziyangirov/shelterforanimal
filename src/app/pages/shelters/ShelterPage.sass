@@ -2,7 +2,8 @@
   margin-top: 56px
 
 .shelters-wrapper
-  width: 1170px
+  max-width: 1200px
+  width: 100%
   position: relative
   overflow: hidden
   margin: 0px auto
@@ -29,3 +30,51 @@
 .btn-shelter
   text-decoration: none
   color: black
+
+@media screen and (max-width: 1250px)
+  .shelters-wrapper
+    max-width: 1100px
+    width: 100%
+
+  .dog-shelter
+    position: absolute
+    z-index: -10
+    top: 0px
+    left: 800px
+
+@media screen and (max-width: 1100px)
+  .shelters-wrapper
+    max-width: 900px
+    width: 100%
+
+  .dog-shelter
+    position: absolute
+    z-index: -10
+    top: 0px
+    left: 570px
+
+
+@media screen and (max-width: 850px)
+  .shelters-wrapper
+    max-width: 750px
+    width: 100%
+
+
+@media screen and (max-width: 730px)
+  .shelters-wrapper
+    max-width: 550px
+    width: 100%
+
+@media screen and (max-width: 500px)
+  .shelters-wrapper
+    max-width: 400px
+    width: 100%
+
+    h2
+      font-size: 32px
+
+
+@media screen and (max-width: 375px)
+  .shelters-wrapper
+    max-width: 343px
+    width: 100%
