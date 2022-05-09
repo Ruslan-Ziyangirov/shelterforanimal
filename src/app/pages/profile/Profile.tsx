@@ -4,20 +4,13 @@ import {database, logOut, uploadUserPhoto, useAuth} from "../../config/firebase"
 import "./Profile.sass"
 import avatar from "../../../assets/dog shelter.png"
 import {ButtonMedium} from "../../components/ui/buttons/medium/ButtonMedium";
-import {ButtonSmall} from "../../components/ui/buttons/small/ButtonSmall";
 import {VisitCard} from "../../components/cards/visitCard/VisitCard";
-import {collection, doc, getDocs, onSnapshot} from "firebase/firestore";
-import firebase from "firebase/compat";
-import {SignIn} from "../../components/modals/signIn/SignIn";
-import {useStores} from "../../../utils/use-stores-hook";
+import {collection, getDocs} from "firebase/firestore";
 import {observer} from "mobx-react";
-import {WriteHistory} from "../../components/modals/writeHistory/WriteHistory";
 import {getAuth, onAuthStateChanged} from "@firebase/auth";
 
 
 export const Profile = observer(() =>{
-
-    const {modalStore: { setCurrentModal } } = useStores();
 
     const usersDatabaseRef = collection(database, 'profile');
     const historyDatabaseRef = collection(database, 'history');
@@ -32,9 +25,7 @@ export const Profile = observer(() =>{
     const [usersInfo, setUsersInfo] = useState<any>([]);
     const [visitHistory, setVisitHistory] = useState<any>([]);
 
-    const onOpenModal = () =>{
-        setCurrentModal(WriteHistory);
-    }
+
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -55,17 +46,19 @@ export const Profile = observer(() =>{
         setLoading(false)
     }
 
-    function handleChange(e:any){
-        if(e.target.files[0]){
+    function handleChange(e: any) {
+        if (e.target.files[0]) {
             setPhoto(e.target.files[0])
         }
     }
 
-    function handleClick(){
+    function handleClick() {
         uploadUserPhoto(photo, currentUser, setLoading)
+            .then();
+        window.location.reload()
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         if (currentUser?.photoURL) {
             setPhotoURL(currentUser.photoURL)
         }
