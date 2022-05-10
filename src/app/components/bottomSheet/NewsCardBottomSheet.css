@@ -1,0 +1,52 @@
+.description-bottom-sheet {
+  width: 500px;
+  margin: 24px auto 0;
+}
+.description-bottom-sheet p {
+  font-size: 18px;
+  line-height: 160%;
+  color: #4D4D4D;
+}
+.description-bottom-sheet .date-wrapper {
+  display: flex;
+  align-items: center;
+}
+.description-bottom-sheet .date-wrapper p {
+  margin-left: 24px;
+}
+
+.footer-bottom-sheet {
+  width: 384px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 500px) {
+  .description-bottom-sheet {
+    width: 343px;
+    margin: 24px auto 0;
+  }
+  .description-bottom-sheet p {
+    font-size: 18px;
+    line-height: 160%;
+    color: #4D4D4D;
+  }
+  .description-bottom-sheet .date-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  .description-bottom-sheet .date-wrapper p {
+    margin-left: 24px;
+  }
+
+  .footer-bottom-sheet {
+    width: 343px;
+    margin: 0 auto;
+  }
+
+  [data-rsbs-footer] {
+    padding: 0px;
+    padding-bottom: 16px;
+  }
+}
+
+/*# sourceMappingURL=NewsCardBottomSheet.css.map */

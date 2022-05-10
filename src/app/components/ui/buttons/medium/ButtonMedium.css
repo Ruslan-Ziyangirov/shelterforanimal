@@ -13,4 +13,10 @@
   border: 3px solid #E0E0E0;
 }
 
+@media screen and (max-width: 500px) {
+  .btn-for-modal {
+    width: 343px;
+  }
+}
+
 /*# sourceMappingURL=ButtonMedium.css.map */
