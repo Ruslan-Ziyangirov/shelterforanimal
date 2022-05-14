@@ -60,7 +60,7 @@ export const MenuBurger = observer(() =>{
                         <div className="profile-menu-burger">
                             { user ? <div className="profile-header-burger">
                                     <img src={profile}/>
-                                    <Link to="/profile">{user.email}</Link>
+                                    <Link to="/profile" onClick={onCloseMenu}>{user.email}</Link>
                                 </div> :
                                 <ButtonSmall title={"Войти"} border={"1px solid #713EDD"} onClick={onOpenModal} />
                             }
