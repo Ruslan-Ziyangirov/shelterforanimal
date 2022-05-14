@@ -40,10 +40,10 @@ export const WhatIsVolunteering = () =>{
                         очень важным аспектом его социализации: волонтёр помогает животному реабилитироваться, перестать
                         бояться, снова «полюбить жизнь» и начать доверять человеку,
                     </p>
-                    <img src={second} className="second-svg"/>
+                    <img src={second}/>
                 </div>
             </div>
-            {Footer}
+            <Footer/>
         </div>
     )
 }
