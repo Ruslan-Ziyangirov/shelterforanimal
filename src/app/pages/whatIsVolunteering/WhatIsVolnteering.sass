@@ -1,13 +1,29 @@
 .volunteering-wrapper
-  width: 1170px
-  margin: 0 auto
-  margin-top: 123px
+  max-width: 1200px
+  width: 100%
+  margin: 123px auto 0
+
+  .top-content-mobile
+    display: none
 
   .top-content
     margin-bottom: 48px
+    display: flex
+    align-items: center
+    justify-content: space-between
+
+    h1
+      color: #19063D
+      font-size: 56px
+      letter-spacing: -0.03em
+      font-weight: 700
+      font-style: normal
+
 
     img
+      max-width: 397px
       width: 100%
+
 
 
   .info-block-wrapper
@@ -19,32 +35,300 @@
     .initial-text
       align-items: center
       display: flex
-      width: 966px
+      max-width: 966px
+      width: 100%
       font-size: 18px
       text-align: center
       margin: auto
 
     .first-paragraph
       margin-top: 48px
-      width: 989px
+      align-items: center
       display: flex
 
+      h1
+        font-weight: 700
+        font-size: 150px
+        color: rgba(25, 6, 61, 0.1)
+        margin: 0px 40px 0px 0px
+
       .first-text
-        margin-left: 40px
-        width: 542px
+        max-width: 542px
+        width: 100%
         font-size: 16px
-        margin-right: 141px
+        margin: 0px 140px 0px 0px
 
     .second-paragraph
       display: flex
       margin-top: 53px
       margin-bottom: 137px
+      align-items: center
+
+      h1
+        font-weight: 700
+        font-size: 150px
+        color: rgba(25, 6, 61, 0.1)
+        margin: 0px 0px 0px 40px
+
 
       .shine-svg
-        margin-left: 64px
 
       .second-text
-        width: 647px
+        max-width: 647px
+        width: 100%
         font-size: 16px
         margin-left: 111px
-        margin-right: 40px
+
+
+@media screen and (max-width: 1250px)
+  .volunteering-wrapper
+    max-width: 1100px
+    width: 100%
+
+@media screen and (max-width: 1100px)
+  .volunteering-wrapper
+    max-width: 900px
+    width: 100%
+
+    .top-content
+      h1
+        font-size: 48px
+
+      img
+        max-width: 307px
+        width: 100%
+
+@media screen and (max-width: 850px)
+  .volunteering-wrapper
+    max-width: 750px
+    width: 100%
+
+    .top-content
+      h1
+        font-size: 40px
+
+      img
+        max-width: 257px
+        width: 100%
+
+    .info-block-wrapper
+      .first-paragraph
+        margin-top: 24px
+        align-items: center
+
+        h1
+          font-size: 120px
+          margin: 0px 32px 0px 0px
+
+        .first-text
+          padding-top: 40px
+          max-width: 542px
+          width: 100%
+          font-size: 16px
+          margin: 0px 40px 0px 0px
+
+      .second-paragraph
+        margin-top: 24px
+        margin-bottom: 64px
+        h1
+          font-size: 120px
+          margin: 0px 0px 0px 32px
+
+        .second-text
+          max-width: 647px
+          width: 100%
+          font-size: 16px
+          margin-left: 40px
+
+@media screen and (max-width: 730px)
+  .volunteering-wrapper
+    max-width: 550px
+    width: 100%
+
+    .top-content
+      display: none
+
+    .top-content-mobile
+      max-width: 450px
+      margin: 0px auto
+      display: block
+
+      h1
+        margin-top: 40px
+        text-align: center
+        color: #19063D
+        font-size: 32px
+        letter-spacing: -0.03em
+        font-weight: 700
+        font-style: normal
+
+
+      img
+        max-width: 250px
+        width: 100%
+        display: block
+        margin: 0 auto
+
+    .info-block-wrapper
+      p
+        font-weight: 400
+        line-height: 170%
+        color: rgba(25, 6, 61, 0.7)
+
+      .initial-text
+        font-size: 16px
+        text-align: left
+        margin: auto
+
+      .first-paragraph
+
+        h1
+          font-size: 88px
+          margin: 0px 24px 0px 0px
+
+
+        .first-text
+          max-width: 542px
+          width: 100%
+          font-size: 16px
+          margin: 0px 24px 0px 0px
+
+      .second-paragraph
+        h1
+          font-size: 88px
+          margin: 0px 0px 0px 24px
+
+        .second-text
+          max-width: 647px
+          width: 100%
+          font-size: 16px
+          margin-left: 24px
+
+
+@media screen and (max-width: 500px)
+  .volunteering-wrapper
+    max-width: 400px
+    width: 100%
+
+    .info-block-wrapper
+      p
+        font-weight: 400
+        line-height: 170%
+        color: rgba(25, 6, 61, 0.7)
+
+      .initial-text
+        font-size: 16px
+        text-align: left
+        margin: auto
+
+      .first-paragraph
+        position: relative
+        h1
+          font-size: 88px
+          top: 0%
+          margin: 0px 24px 0px 0px
+          position: absolute
+          opacity: 50%
+
+        .sun-img
+          position: absolute
+          top: 70%
+          left: 75%
+          opacity: 30%
+
+        .first-text
+          max-width: 542px
+          width: 100%
+          font-size: 16px
+          margin: 0px 24px 0px 0px
+          z-index: 10
+
+      .second-paragraph
+        align-items: normal
+        position: relative
+        margin-top: 56px
+
+        h1
+          left: 60%
+          position: absolute
+          font-size: 88px
+          margin: 0px 0px 0px 24px
+          opacity: 50%
+
+        .second-text
+          padding-top: 30px
+          max-width: 647px
+          width: 100%
+          font-size: 16px
+          margin-left: 0px
+          z-index: 10
+
+        .shine-img
+          position: absolute
+          opacity: 30%
+          top: 80%
+
+
+@media screen and (max-width: 375px)
+  .volunteering-wrapper
+    max-width: 343px
+    width: 100%
+
+    .info-block-wrapper
+      margin: 0 auto
+      p
+        font-weight: 400
+        line-height: 170%
+        color: rgba(25, 6, 61, 0.7)
+
+      .initial-text
+        font-size: 16px
+        text-align: left
+        margin: auto
+
+      .first-paragraph
+        position: relative
+        h1
+          font-size: 88px
+          top: 0%
+          margin: 0px 24px 0px 0px
+          position: absolute
+          opacity: 50%
+
+        .sun-img
+          position: absolute
+          top: 70%
+          left: 68%
+          opacity: 30%
+
+        .first-text
+          max-width: 542px
+          width: 100%
+          font-size: 16px
+          margin: 0px 24px 0px 0px
+          z-index: 10
+
+      .second-paragraph
+        align-items: normal
+        position: relative
+        margin-top: 56px
+
+        h1
+          left: 58%
+          position: absolute
+          font-size: 88px
+          margin: 0px 0px 0px 24px
+          opacity: 50%
+
+        .second-text
+          padding-top: 30px
+          max-width: 647px
+          width: 100%
+          font-size: 16px
+          margin-left: 0px
+          z-index: 10
+
+        .shine-img
+          position: absolute
+          opacity: 30%
+          top: 80%
