@@ -8,11 +8,15 @@ import "./News.sass";
 import {collection, getDocs} from "firebase/firestore";
 import {database} from "../../config/firebase";
 import {useEffect, useState} from "react";
+import {SkeletonSheltersPage} from "../../components/aimation/skeleton/skeletonSheltersPage/SkeletonSheltersPage";
+import {SkeletonNewsPage} from "../../components/aimation/skeleton/skeletonNewsPage/SkeletonNewsPage";
 
 export const News = () => {
 
     const newsDatabaseRef = collection(database, 'news');
     const [newsInfo, setNewInfo] = useState<any>([]);
+    const [loading,setLoading] = useState<any>([]);
+
 
     useEffect(() => {
         const getNewsInfo = async () => {
@@ -23,23 +27,35 @@ export const News = () => {
         getNewsInfo().then();
     },[])
 
+    useEffect(() => {
+        setLoading(true);
+        const timing = setTimeout(() => {
+            setLoading(false);
+        }, 2200);
+        return () => clearTimeout(timing);
+    }, []);
+
     return (
         <div>
             <div className="news-page-body">
                 <div className="news-wrapper">
-                    <h2>
-                        <span>Новости</span>
-                    </h2>
+                    {loading ? <SkeletonNewsPage/> :
+                        <>
+                            <h2>
+                                <span>Новости</span>
+                            </h2>
 
-                    <div className="news-list">
-                        {newsInfo.map((newInfo: any) => (
-                                <NewsCard title={newInfo.title}
-                                          description={newInfo.description}
-                                          date={newInfo.date}
-                                          image={newInfo.image}/>
-                            )
-                        )}
-                    </div>
+                            <div className="news-list">
+                                {newsInfo.map((newInfo: any) => (
+                                        <NewsCard title={newInfo.title}
+                                                  description={newInfo.description}
+                                                  date={newInfo.date}
+                                                  image={newInfo.image}/>
+                                    )
+                                )}
+                            </div>
+                        </>
+                    }
                 </div>
             </div>
             <Footer/>

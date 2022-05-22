@@ -9,7 +9,7 @@ import {
     updateProfile
 
 } from "@firebase/auth";
-import {addDoc, collection, getFirestore} from 'firebase/firestore';
+import {addDoc, collection, getDocs, getFirestore} from 'firebase/firestore';
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 import {useEffect, useState} from "react";
 
@@ -71,21 +71,5 @@ export function useAuth(){
     return currentUser;
 }
 
-
-
-export async function uploadUserPhoto(file:any, currentUser:any, setLoading:any){
-    console.log(file)
-    const fileRef = ref(storage, currentUser.uid + '.png')
-    console.log(fileRef)
-    setLoading(true)
-    const snapshot = await uploadBytes(fileRef, file)
-    const photoURL = await getDownloadURL(fileRef)
-    console.log("FFF, " + snapshot+" s " +photoURL)
-
-    await updateProfile(currentUser, {photoURL})
-
-
-    setLoading(false)
-}
 
 

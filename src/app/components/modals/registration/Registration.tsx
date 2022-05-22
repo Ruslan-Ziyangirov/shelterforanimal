@@ -6,10 +6,12 @@ import {Button} from "../../ui/buttons/large/Button";
 import {Modal} from "../modal";
 import {SignIn} from "../signIn/SignIn";
 import {ButtonMedium} from "../../ui/buttons/medium/ButtonMedium";
+import 'react-toastify/dist/ReactToastify.css';
 import ReactDOM from "react-dom";
 import {Router, useNavigate} from "react-router-dom";
 import {signUp, useAuth} from "../../../config/firebase";
 import * as Yup from "yup";
+import {toast} from "react-toastify";
 
 
 interface Props{
@@ -50,9 +52,29 @@ export const Registration = observer( () =>{
         setLoading(true)
         try {
             await signUp(values.email, values.password, values)
+            toast('Регистрация прошла успешно!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                type: 'success',
+                draggable: true,
+                progress: undefined,
+            })
             clearCurrentModal()
         } catch(e) {
             console.log((e as Error).message)
+            toast('Вы не смогли зарегистрироваться!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                type: 'error',
+                draggable: true,
+                progress: undefined,
+            })
         }
         setLoading(false)
     }
