@@ -6,8 +6,10 @@ import {Modal} from "../modal";
 import {Field, Form, Formik, FormikValues} from "formik";
 import {ButtonMedium} from "../../ui/buttons/medium/ButtonMedium";
 import {addDoc, collection} from "firebase/firestore";
+import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from "yup";
 import "./WriteHistory.sass"
+import {toast} from "react-toastify";
 
 interface Props{
     name:string,
@@ -64,8 +66,28 @@ export const WriteHistory:FC<WriteHistoryModal> = observer( ({nameShelter, show}
 
                 }).then(res => console.log(res));
             onCloseModal();
+            toast('Вы успешно оставили заявку!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                type: 'success',
+                draggable: true,
+                progress: undefined,
+            })
         } catch(e) {
             console.log((e as Error).message)
+            toast('Записаться не получилось!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                type: 'error',
+                draggable: true,
+                progress: undefined,
+            })
         }
         setLoading(false)
     }

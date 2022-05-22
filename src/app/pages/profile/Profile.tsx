@@ -1,13 +1,17 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {database, logOut, uploadUserPhoto, useAuth} from "../../config/firebase";
+import {database, logOut, useAuth} from "../../config/firebase";
 import "./Profile.sass"
 import avatar from "../../../assets/dog shelter.png"
 import {ButtonMedium} from "../../components/ui/buttons/medium/ButtonMedium";
 import {VisitCard} from "../../components/cards/visitCard/VisitCard";
-import {collection, getDocs} from "firebase/firestore";
+import {collection, doc, getDocs, query, updateDoc, where} from "firebase/firestore";
 import {observer} from "mobx-react";
 import {getAuth, onAuthStateChanged} from "@firebase/auth";
+import test from "../../../assets/1920x1200_1388552_[www.ArtFile.ru].jpg"
+import {toast} from "react-toastify";
+import {SkeletonSheltersPage} from "../../components/aimation/skeleton/skeletonSheltersPage/SkeletonSheltersPage";
+import {SkeletonProfilePage} from "../../components/aimation/skeleton/skeletonProfilePage/SkeletonProfilePage";
 
 
 export const Profile = observer(() =>{
@@ -19,13 +23,10 @@ export const Profile = observer(() =>{
     let router = useNavigate()
     const auth = getAuth();
 
-    const [photo, setPhoto] = useState(null);
-    const [photoURL, setPhotoURL] = useState(avatar);
+    const [file, setFile] = useState('');
     const [loading, setLoading] = useState(false);
     const [usersInfo, setUsersInfo] = useState<any>([]);
     const [visitHistory, setVisitHistory] = useState<any>([]);
-
-
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -40,29 +41,47 @@ export const Profile = observer(() =>{
         try {
             await logOut()
             router('/')
+            toast('Вы успешно вышли из аккаунта!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                type: 'success',
+                draggable: true,
+                progress: undefined,
+            })
         } catch {
-            alert("Error!")
+            toast('Вы не смогли выйти из аккаунта', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                type: 'error',
+                draggable: true,
+                progress: undefined,
+            })
         }
         setLoading(false)
     }
 
     function handleChange(e: any) {
         if (e.target.files[0]) {
-            setPhoto(e.target.files[0])
+            setFile(URL.createObjectURL(e.target.files[0]));
         }
+        console.log(file)
     }
 
-    function handleClick() {
-        uploadUserPhoto(photo, currentUser, setLoading)
-            .then();
-        window.location.reload()
-    }
+    const profileDocRef = doc(database, 'profile', "IRP8twdILbz5XYIJ3gmc");
 
-    useEffect(() => {
-        if (currentUser?.photoURL) {
-            setPhotoURL(currentUser.photoURL)
-        }
-    }, [currentUser])
+
+    const updatePhoto = async () =>{
+        console.log(file + " фото юрл ")
+        await updateDoc(profileDocRef, {
+            "photoURL": test,
+        });
+    }
 
 
     useEffect(() => {
@@ -72,9 +91,11 @@ export const Profile = observer(() =>{
             let user = arr.findIndex(function (user,index){
                 return user.uid === uid
             })
+
             let ans = arr[user]
             setUsersInfo(ans)
         };
+        console.log(usersInfo.photoURL)
         getUserInfo().then();
     }, [])
 
@@ -91,43 +112,54 @@ export const Profile = observer(() =>{
         getHistoryInfo();
     },[])
 
+    useEffect(() => {
+        setLoading(true);
+        const timing = setTimeout(() => {
+            setLoading(false);
+        }, 2200);
+        return () => clearTimeout(timing);
+    }, []);
+
     return(
         <div className="profile-wrapper">
-            <h1>Личный кабинет</h1>
-                <div className="personal-card">
-                    <div className="personal-information-wrapper">
-                        <img className="personal-img" src={usersInfo.photoURL} />
-                        <h3>
-                            {usersInfo.name}
-                        </h3>
-                        <p>
-                            {usersInfo.phone}
-                        </p>
-                        <p>
-                            {usersInfo.email}
-                        </p>
-                        <input type="file" className="upload-file" onChange={handleChange}/>
-                        <ButtonMedium title={"Поменять фото"}
-                                      background={"#713EDD"}
-                                      color={"white"}
-                                      onClick={handleClick}
-                                      disabled={loading || !photo}
-                                      />
-                        <button disabled={loading|| !currentUser}
-                                     onClick={handleLogout} className="output">
-                            Выйти
-                        </button>
-                    </div>
+            {loading ? <SkeletonProfilePage/> :
+                <>
+                    <h1>Личный кабинет</h1>
+                    <div className="personal-card">
+                        <div className="personal-information-wrapper">
+                            <img className="personal-img" src={usersInfo.photoURL} alt="фото"/>
+                            <h3>
+                                {usersInfo.name}
+                            </h3>
+                            <p>
+                                {usersInfo.phone}
+                            </p>
+                            <p>
+                                {usersInfo.email}
+                            </p>
+                            <input type="file" className="upload-file" multiple={true} onChange={handleChange}/>
+                            <ButtonMedium title={"Поменять фото"}
+                                          background={"#713EDD"}
+                                          color={"white"}
+                                          onClick={updatePhoto}
+                            />
+                            <button disabled={loading || !currentUser}
+                                    onClick={handleLogout} className="output">
+                                Выйти
+                            </button>
+                        </div>
 
-                     <div className="visit-history-wrapper">
-                        <h4>История посещений</h4>
-                         {visitHistory.map((visit:any) =>(
-                             <VisitCard title={visit.title} date={visit.date} time={visit.time}/>
-                             )
-                         )}
+                        <div className="visit-history-wrapper">
+                            <h4>История посещений</h4>
+                            {visitHistory.map((visit: any) => (
+                                    <VisitCard title={visit.title} date={visit.date} time={visit.time}/>
+                                )
+                            )}
 
+                        </div>
                     </div>
-                </div>
+                </>
+            }
         </div>
     )
 })

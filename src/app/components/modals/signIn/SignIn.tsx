@@ -4,11 +4,13 @@ import {useStores} from "../../../../utils/use-stores-hook";
 import {Modal} from "../modal";
 import {Field, Form, Formik, FormikValues} from "formik";
 import "./SignIn.sass";
+import 'react-toastify/dist/ReactToastify.css';
 import {ButtonMedium} from "../../ui/buttons/medium/ButtonMedium";
 import {Registration} from "../registration/Registration";
 import {signIn, useAuth} from "../../../config/firebase";
 import {useNavigate} from "react-router-dom";
 import * as Yup from "yup";
+import {ToastContainer,toast} from "react-toastify";
 
 interface Props{
     name:string,
@@ -55,8 +57,27 @@ export const SignIn = observer( () =>{
             await signIn(values.email, values.password);
             router('/profile')
             clearCurrentModal()
+            toast('Вход прошел успешно!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                type: 'success',
+                draggable: true,
+                progress: undefined,
+            })
         } catch {
-            alert("Error!")
+            toast('Такого пользователя не существует!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                type: 'error',
+                draggable: true,
+                progress: undefined,
+            })
         }
         setLoading(false)
     }
@@ -71,7 +92,6 @@ export const SignIn = observer( () =>{
                 "Пароль должен содержать строчные латинские  буквы, а также цифру")
             .min(5, "Минимальная длинна пароля - 5 символа"),
     });
-
 
 
     return (
@@ -132,7 +152,6 @@ export const SignIn = observer( () =>{
                     </div>
                 )}
             </Formik>
-
         </Modal>
     )
 });

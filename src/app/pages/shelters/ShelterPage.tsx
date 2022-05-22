@@ -12,6 +12,7 @@ import {VisitCard} from "../../components/cards/visitCard/VisitCard";
 import {Link} from "react-router-dom";
 import {useStores} from "../../../utils/use-stores-hook";
 import {getSheltersInfo} from "../../../utils/collectionData";
+import {SkeletonSheltersPage} from "../../components/aimation/skeleton/skeletonSheltersPage/SkeletonSheltersPage";
 
 export const ShelterPage = () =>{
 
@@ -20,6 +21,7 @@ export const ShelterPage = () =>{
     const {shelterStore: {sheltersMock}} = useStores();
     const [sheltersInfo, setShelterInfo] = useState<any>([]);
     const sheltersDatabaseRef = collection(database, 'shelters');
+    const [loading,setLoading] = useState<any>([]);
 
     useEffect(()=>{
         const getSheltersList = async () =>{
@@ -31,28 +33,43 @@ export const ShelterPage = () =>{
             getSheltersList().then();
     },[])
 
+    useEffect(() => {
+        setLoading(true);
+        const timing = setTimeout(() => {
+            setLoading(false);
+        }, 2200);
+        return () => clearTimeout(timing);
+    }, []);
+
+
+
 
     return(
         <div className="shelter-page-body">
-            <div className="shelters-wrapper">
-                <h2>
-                    <span>Приюты</span> Казани
-                </h2>
-                <img className="dog-shelter" src={dogShelter}/>
+                <div className="shelters-wrapper">
+                    {loading ? <SkeletonSheltersPage/> :
+                        <>
+                            <h2>
+                                <span>Приюты</span> Казани
+                            </h2>
+                            <img className="dog-shelter" src={dogShelter}/>
 
-                <div className="shelter-list">
-                    {sheltersInfo.map((shelter:any) =>(
-                        <Link className="btn-shelter" to={`/shelters/${shelter.id}`}>
-                            <ShelterCard title={shelter.title}
-                                         description={shelter.description}
-                                         address={shelter.address}
-                                         image={shelter.image}/>
-                        </Link>
-                        )
-                    )}
+                            <div className="shelter-list">
+                                {sheltersInfo.map((shelter: any) => (
+                                        <Link className="btn-shelter" to={`/shelters/${shelter.id}`}>
+                                            <ShelterCard title={shelter.title}
+                                                         description={shelter.description}
+                                                         address={shelter.address}
+                                                         image={shelter.image}/>
+                                        </Link>
+                                    )
+                                )}
+                            </div>
+                        </>
+
+                    }
                 </div>
-            </div>
-            <Footer/>
+                <Footer/>
         </div>
     )
 }

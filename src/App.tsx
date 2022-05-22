@@ -7,11 +7,14 @@ import {WhatIsVolunteering} from "./app/pages/whatIsVolunteering/WhatIsVolunteer
 import {News} from "./app/pages/news/News";
 import {Profile} from "./app/pages/profile/Profile";
 import {Shelter} from "./app/pages/shelter/Shelter";
+import {ToastContainer} from "react-toastify";
+import React from "react";
 
 
 const App = () => (
     <div>
         <Header/>
+        <ToastContainer />
         <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/shelters" element={<ShelterPage/>}/>
