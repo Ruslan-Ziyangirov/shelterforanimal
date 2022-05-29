@@ -1,14 +1,17 @@
-.shelters-list-skeleton {
-  border: 1px solid #dadada;
-  border-radius: 50px;
-}
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 1 | @import "src/app/styles/colors"
+ *   |         ^^^^^^^^^^^^^^^^^^^^^^^
+ *   '
+ *   SkeletonSheltersPage.sass 1:9  root stylesheet */
 
-.shelter-wrapper-skeleton {
-  display: flex;
-  align-items: normal;
-  justify-content: space-between;
-  width: 1068px;
-  padding: 32px;
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import \"src/app/styles/colors\"\d\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   SkeletonSheltersPage.sass 1:9  root stylesheet";
 }
-
-/*# sourceMappingURL=SkeletonSheltersPage.css.map */

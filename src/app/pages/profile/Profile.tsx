@@ -32,7 +32,7 @@ export const Profile = observer(() =>{
         if (user) {
              uid = user.uid;
         } else {
-            console.log("Пользователь почему-то не авторизован")
+
         }
     });
 
@@ -95,7 +95,6 @@ export const Profile = observer(() =>{
             let ans = arr[user]
             setUsersInfo(ans)
         };
-        console.log(usersInfo.photoURL)
         getUserInfo().then();
     }, [])
 
@@ -116,7 +115,7 @@ export const Profile = observer(() =>{
         setLoading(true);
         const timing = setTimeout(() => {
             setLoading(false);
-        }, 2200);
+        }, 1800);
         return () => clearTimeout(timing);
     }, []);
 

@@ -1,3 +1,6 @@
+@import "src/app/styles/mixins.sass"
+@import "src/app/styles/colors"
+
 .news-card-wrapper
   max-width: 1033px
   display: block
@@ -21,12 +24,12 @@
 
       h3
         font-size: 30px
-        color: #0C73FE
+        color: $c-blue
         letter-spacing: -0.03em
         margin: 0
 
       p
-        color: rgba(0, 0, 0, 0.7)
+        color: $c-black-70
         font-size: 18px
         letter-spacing: -0.03em
         line-height: 140%
@@ -46,7 +49,7 @@
   padding-bottom: 40px
 
 
-@media screen and (max-width: 1250px)
+@include screenMax1250
   .news-card-wrapper
     max-width: 1000px
 
@@ -61,12 +64,10 @@
 
         h3
           font-size: 27px
-          color: #0C73FE
           letter-spacing: -0.03em
           margin: 0
 
         p
-          color: rgba(0, 0, 0, 0.7)
           font-size: 18px
           letter-spacing: -0.03em
           line-height: 138%
@@ -79,7 +80,7 @@
 
 
 
-@media screen and (max-width: 1100px)
+@include screenMax1100
   .news-card-wrapper
     max-width: 820px
 
@@ -93,12 +94,10 @@
 
         h3
           font-size: 27px
-          color: #0C73FE
           letter-spacing: -0.03em
           margin: 0
 
         p
-          color: rgba(0, 0, 0, 0.7)
           font-size: 16px
           letter-spacing: -0.03em
           line-height: 138%
@@ -109,7 +108,7 @@
           p
             margin: 0px 0px 0px 16px
 
-@media screen and (max-width: 850px)
+@include screenMax850
   .news-card-wrapper
     max-width: 700px
 
@@ -136,7 +135,7 @@
 
 
 
-@media screen and (max-width: 730px)
+@include screenMax730
   .news-card-wrapper
     max-width: 510px
 
@@ -172,7 +171,7 @@
 
 
 
-@media screen and (max-width: 500px)
+@include screenMax500
   .news-card-wrapper
     max-width: 350px
 
@@ -206,7 +205,7 @@
             font-weight: 500
 
 
-@media screen and (max-width: 375px)
+@include screenMax375
   .news-card-wrapper
     max-width: 315px
 

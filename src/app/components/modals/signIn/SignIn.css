@@ -1,75 +1,17 @@
-.title-btn-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 48px;
-}
-.title-btn-wrapper .btn-close {
-  cursor: pointer;
-  background: transparent;
-  border: 0px;
-  padding: 0px;
-  height: 20px;
-}
-.title-btn-wrapper h3 {
-  font-weight: 600;
-  font-size: 28px;
-  margin: 0px;
-}
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 1 | @import "src/app/styles/colors.sass"
+ *   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *   '
+ *   SignIn.sass 1:9  root stylesheet */
 
-.elements-wrapper {
-  width: 384px;
-  margin: 48px auto;
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import \"src/app/styles/colors.sass\"\d\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   SignIn.sass 1:9  root stylesheet";
 }
-
-.link-wrapper {
-  display: flex;
-  justify-content: space-between;
-  margin: 16px auto 32px;
-}
-.link-wrapper .btn-as-link {
-  background: transparent;
-  font-style: normal;
-  border: 0px;
-  color: #713EDD;
-  font-weight: 400;
-  font-size: 16px;
-  cursor: pointer;
-}
-.link-wrapper .btn-as-link:hover {
-  color: #713EDD;
-}
-
-.error {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  color: #FF4545;
-  margin: -7px 0px 24px 16px;
-  padding: 0px;
-}
-
-input {
-  width: 364px;
-  height: 60px;
-  margin-bottom: 24px;
-  border: 1px solid rgba(0, 11, 38, 0.16);
-  border-radius: 8px;
-  outline: none;
-  padding-left: 20px;
-  color: rgba(0, 11, 38, 0.7);
-}
-
-input::placeholder {
-  font-size: 14px;
-  font-weight: 400;
-  font-style: normal;
-  color: rgba(0, 11, 38, 0.4);
-  padding: 20px 0px 20px 0px;
-}
-
-input:last-child {
-  margin-bottom: 32px;
-}
-
-/*# sourceMappingURL=SignIn.css.map */

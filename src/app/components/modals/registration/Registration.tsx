@@ -48,7 +48,6 @@ export const Registration = observer( () =>{
 
 
     async function handleSignUp(values: FormikValues){
-        console.log(values)
         setLoading(true)
         try {
             await signUp(values.email, values.password, values)
@@ -120,7 +119,6 @@ export const Registration = observer( () =>{
             }}
 
                     onSubmit={values => {
-                        console.log(values)
                         handleSignUp(values);
                     }}
                     validationSchema={schema}

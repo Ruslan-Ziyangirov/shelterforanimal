@@ -29,15 +29,13 @@ const storage = getStorage()
 export const database = getFirestore(app);
 const usersDatabaseRef = collection(database, 'profile');
 const historyDatabaseRef = collection(database, 'history');
-
-
+let uid = "";
 
 
 
 export function signUp(email:any,  password:any, userData?:any){
     return createUserWithEmailAndPassword(auth, email, password)
         .then((registeredUser) => {
-            console.log(userData);
             addDoc(usersDatabaseRef, {
                 uid: registeredUser.user.uid,
                 name: userData.name,
@@ -49,15 +47,39 @@ export function signUp(email:any,  password:any, userData?:any){
         })
 }
 
-
-
-
 export function signIn(email:any, password:any){
     return signInWithEmailAndPassword(auth, email, password);
 }
 
 export function logOut(){
     return signOut(auth)
+}
+export function getProfile(){
+
+    let usersInfo: any;
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            uid = user.uid;
+        } else {
+            console.log("Пользователь почему-то не авторизован")
+        }
+    });
+
+    const getUserInfo = async () => {
+        const data = await getDocs(usersDatabaseRef);
+        let arr = data.docs.map((doc) => ({...doc.data()}))
+        let user = arr.findIndex(function (user,index){
+            return user.uid === uid
+        })
+
+        let ans = arr[user]
+        usersInfo = ans
+    };
+    console.log(usersInfo.photoURL)
+    getUserInfo().then();
+
+    return usersInfo;
 }
 
 export function useAuth(){

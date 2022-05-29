@@ -9,6 +9,7 @@ export const Home = () =>{
 
     let router = useNavigate()
 
+
     const onOpenSheltersPage = () =>{
         router("/shelters")
     }

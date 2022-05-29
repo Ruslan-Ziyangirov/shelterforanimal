@@ -1,3 +1,6 @@
+@import "src/app/styles/mixins.sass"
+@import "src/app/styles/colors"
+
 .card-wrapper
   padding-top: 40px
   display: block
@@ -20,7 +23,7 @@
       width: 100%
 
       h3
-        color: #713EDD
+        color: $c-purple
         font-size: 32px
         letter-spacing: -0.03em
         margin: 0px
@@ -29,7 +32,7 @@
         font-weight: 400
         font-size: 16px
         line-height: 148%
-        margin: 22px 0px
+        margin: 32px 0px
 
     .mobile-description
       display: none
@@ -39,13 +42,13 @@
       align-items: center
 
       p
-        margin: 0px
         line-height: 148%
-        margin-left: 8px
+        margin: 0px 0px 0px 8px
 
 
 .card-wrapper:last-child
   padding-bottom: 40px
+
 
 
 
@@ -54,13 +57,11 @@
   align-items: center
   justify-content: space-between
 
-@media screen and (max-width: 1250px)
+@include screenMax1250
   .card-wrapper
     max-width: 1000px
 
-
     .image-description
-
       img
         width: 290px
         height: 200px
@@ -70,14 +71,11 @@
         max-width: 670px
 
 
-
-@media screen and (max-width: 1100px)
+@include screenMax1100
   .card-wrapper
     max-width: 850px
 
-
     .image-description
-
       img
         width: 240px
         height: 180px
@@ -86,13 +84,11 @@
       .information-card
         max-width: 580px
 
-@media screen and (max-width: 850px)
+@include screenMax850
   .card-wrapper
     max-width: 680px
 
-
     .image-description
-
       img
         width: 200px
         height: 180px
@@ -102,7 +98,6 @@
         max-width: 460px
 
         h3
-          color: #713EDD
           font-size: 24px
           letter-spacing: -0.03em
           margin: 0px
@@ -114,13 +109,11 @@
           margin: 12px 0px
 
 
-@media screen and (max-width: 730px)
+@include screenMax730
   .card-wrapper
     max-width: 510px
 
-
     .image-description
-
       img
         width: 180px
         height: 170px
@@ -133,7 +126,6 @@
           margin-bottom: 12px
 
         h3
-          color: #713EDD
           font-size: 20px
           letter-spacing: -0.03em
           margin: 0px
@@ -148,10 +140,9 @@
           p
             margin-top: 12px
 
-@media screen and (max-width: 500px)
+@include screenMax500
   .card-wrapper
     max-width: 340px
-
 
     .image-description
       align-items: normal
@@ -165,21 +156,36 @@
         display: none
 
       .mobile-description
-        display: block
+        margin-left: 24px
+        display: flex
+        justify-content: space-between
+        align-items: center
+        flex-wrap: wrap
+        align-content: space-between
 
         .arrow-go
-          align-items: end
-          padding-left: 90px
+          width: 48px
+          height: 48px
+
+
+          button
+            width: 48px
+            height: 48px
+            background: white
+            border: 0px
+            border-radius: 8px
+            box-shadow: 0px 4px 24px rgba(0, 11, 38, 0.05)
+
 
 
         .mobile-title
           display: block
-          color: #713EDD
+          color: $c-purple
           font-size: 28px
           letter-spacing: -0.03em
-          margin: 0px 0px 90px
+          margin: 0px
 
-@media screen and (max-width: 375px)
+@include screenMax375
   .card-wrapper
     max-width: 300px
 
@@ -199,8 +205,8 @@
         display: block
 
         .arrow-go
-          padding-left: 80px
 
+          padding-left: 80px
 
         .mobile-title
           font-size: 25px

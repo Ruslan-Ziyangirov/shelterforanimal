@@ -1,3 +1,6 @@
+@import "src/app/styles/mixins.sass"
+@import "src/app/styles/colors.sass"
+
 .shelter-page-body
   margin-top: 56px
 
@@ -14,7 +17,7 @@
     margin-left: 51px
 
   span
-    color: #713EDD
+    color: $c-purple
 
   .shelter-list
     background: #EFF1F4
@@ -31,7 +34,7 @@
   text-decoration: none
   color: black
 
-@media screen and (max-width: 1250px)
+@include screenMax1250
   .shelters-wrapper
     max-width: 1100px
     width: 100%
@@ -42,7 +45,7 @@
     top: 0px
     left: 800px
 
-@media screen and (max-width: 1100px)
+@include screenMax1100
   .shelters-wrapper
     max-width: 900px
     width: 100%
@@ -54,18 +57,17 @@
     left: 570px
 
 
-@media screen and (max-width: 850px)
+@include screenMax850
   .shelters-wrapper
     max-width: 750px
     width: 100%
 
-
-@media screen and (max-width: 730px)
+@include screenMax730
   .shelters-wrapper
     max-width: 550px
     width: 100%
 
-@media screen and (max-width: 500px)
+@include screenMax500
   .shelters-wrapper
     max-width: 400px
     width: 100%
@@ -73,8 +75,7 @@
     h2
       font-size: 32px
 
-
-@media screen and (max-width: 375px)
+@include screenMax375
   .shelters-wrapper
     max-width: 343px
     width: 100%

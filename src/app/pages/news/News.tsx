@@ -31,7 +31,7 @@ export const News = () => {
         setLoading(true);
         const timing = setTimeout(() => {
             setLoading(false);
-        }, 2200);
+        }, 1800);
         return () => clearTimeout(timing);
     }, []);
 

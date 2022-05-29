@@ -49,7 +49,6 @@ export const Shelter = observer(() =>{
             const data = await getDocs(sheltersDatabaseRef);
             let arr = data.docs.map((doc) => ({...doc.data()}))
             setShelterInfo(arr)
-            console.log(arr)
         };
         getSheltersList().then();
     },[])
@@ -91,7 +90,7 @@ export const Shelter = observer(() =>{
                             <h3>
                                 {shelterInformation.title}
                             </h3>
-                            <Stars/>
+                            <Stars ratingShelter={shelterInformation.rating}/>
                         </div>
                         <p className="description-shelter">
                             {shelterInformation.description}

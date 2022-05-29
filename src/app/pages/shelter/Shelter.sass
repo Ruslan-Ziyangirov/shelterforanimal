@@ -1,8 +1,10 @@
+@import "src/app/styles/mixins.sass"
+@import "src/app/styles/colors.sass"
+
 .shelter-body-wrapper
   max-width: 1200px
   width: 100%
-  margin: 0 auto
-  margin-bottom: 56px
+  margin: 0 auto 56px
 
   h2
     margin-top: 96px
@@ -11,7 +13,7 @@
     margin-left: 51px
 
     span
-      color: #713EDD
+      color: $c-purple
 
 .shelter-information-wrapper
   padding: 0px 40px
@@ -50,7 +52,7 @@
     font-weight: 700
     font-size: 40px
     letter-spacing: -0.03em
-    color: #713EDD
+    color: $c-purple
     margin: 0px
 
   .header-and-stars
@@ -64,7 +66,7 @@
   font-weight: 400
   font-size: 18px
   letter-spacing: -0.03em
-  color: rgba(0, 0, 0, 0.7)
+  color: $c-black-70
   line-height: 148%
   margin: 40px 0px
 
@@ -114,7 +116,7 @@
   font-weight: 500
   font-size: 16px
   cursor: pointer
-  background: #713EDD
+  background: $c-purple
   color: white
   padding: 19px 55px
   transition: 400ms
@@ -125,7 +127,7 @@
   transition: 400ms
 
 
-@media screen and (max-width: 1250px)
+@include screenMax1250
   .shelter-body-wrapper
     max-width: 1100px
     width: 100%
@@ -134,7 +136,7 @@
     max-width: 540px
     width: 100%
 
-@media screen and (max-width: 1100px)
+@include screenMax1100
   .shelter-information-wrapper
     padding: 0px 28px
 
@@ -154,7 +156,7 @@
         height: 295px
         border-radius: 22px
 
-@media screen and (max-width: 850px)
+@include screenMax850
   .shelter-body-wrapper
     max-width: 750px
     width: 100%
@@ -175,7 +177,7 @@
     font-weight: 400
     font-size: 16px
     letter-spacing: -0.03em
-    color: rgba(0, 0, 0, 0.7)
+    color: $c-black-70
     line-height: 148%
     margin: 24px 0px
 
@@ -185,7 +187,7 @@
     padding: 12px 32px
 
 
-@media screen and (max-width: 730px)
+@include screenMax730
   .shelter-body-wrapper
     max-width: 550px
     width: 100%
@@ -224,7 +226,7 @@
     font-size: 13px
     padding: 6px 16px
 
-@media screen and (max-width: 500px)
+@include screenMax500
   .shelter-body-wrapper
     max-width: 400px
     width: 100%
@@ -264,7 +266,7 @@
     h3
         font-size: 24px
 
-@media screen and (max-width: 375px)
+@include screenMax375
   .shelter-body-wrapper
     width: 343px
 
