@@ -66,6 +66,14 @@ export const Profile = observer(() =>{
         setLoading(false)
     }
 
+    useEffect(() => {
+        setLoading(true);
+        const timing = setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+        return () => clearTimeout(timing);
+    }, []);
+
     function handleChange(e: any) {
         if (e.target.files[0]) {
             setFile(URL.createObjectURL(e.target.files[0]));
@@ -111,13 +119,6 @@ export const Profile = observer(() =>{
         getHistoryInfo();
     },[])
 
-    useEffect(() => {
-        setLoading(true);
-        const timing = setTimeout(() => {
-            setLoading(false);
-        }, 1800);
-        return () => clearTimeout(timing);
-    }, []);
 
     return(
         <div className="profile-wrapper">

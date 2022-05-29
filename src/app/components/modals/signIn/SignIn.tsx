@@ -126,6 +126,7 @@ export const SignIn = observer( () =>{
 
                                 <Field    name="password"
                                           placeholder="Пароль"
+                                          type="password"
 
                                           />
 
