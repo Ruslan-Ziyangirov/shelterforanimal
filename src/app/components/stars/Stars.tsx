@@ -1,32 +1,47 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import "./Stars.sass"
+import { FaStar } from  "react-icons/fa"
+import {a} from "@react-spring/web";
 
-interface Props{
-    name:string,
-    height: number|string;
-    width:number|string;
+interface Star {
+    id?: number
+    ratingShelter?: number
 }
 
 
-export const Icon: FC<Props> = ({ name, height,width}) => {
-    return (
-        <svg
-            version='1.1'
-            xmlns='http://www.w3.org/2000/svg'
-            style={{
-                width: `${width}px`,
-                height: `${height}px`,
-            }}
-        >
-            <use xlinkHref={`/sprite.svg#${name}`}></use>
-        </svg>
-    );
-}
 
-export const Stars = () =>{
+export const Stars: FC<Star> = ({ratingShelter, id}) =>{
+    const [rating, setRating] = useState<any>(null);
+    const [hover, setHover] = useState<any>(null);
+
     return(
         <div className="stars-wrapper">
-            <Icon name={"stars"} height={"25"} width={"171"}/>
+            {
+                [ ... Array(5)].map((star, index) =>{
+                    const ratingValue = index + 1;
+
+                   return (
+                       <label>
+                           <input
+                               type="radio"
+                               name="rating"
+                               value={ratingValue}
+                               onClick={()=>(
+                                   setRating(ratingValue)
+                               )}
+                           />
+                           <FaStar
+                               className="star"
+                               size={26}
+                               color = {ratingValue <= (hover || ratingShelter) ? "#ffc107" : "#e4e5e9"}
+                               onMouseEnter={() => setHover(ratingValue)}
+                               onMouseLeave={() => setHover(null)}
+                           />
+                       </label>
+
+                   )
+                })
+            }
         </div>
     )
 }

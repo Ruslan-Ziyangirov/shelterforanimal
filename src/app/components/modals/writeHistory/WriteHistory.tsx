@@ -100,7 +100,7 @@ export const WriteHistory:FC<WriteHistoryModal> = observer( ({nameShelter, show}
             .min(5, "Минимальная длинна пароля - 5 символа"),
         time: Yup.string()
             .required("Пожалуйста,введите время")
-            .matches(/^[0-2][0-3]:[0-5][0-9]$/g,
+            .matches(/^[0-2][0-9]:[0-5][0-9]$/g,
                 "Неправильно ввели время")
             .min(5, "Минимальная длинна пароля - 5 символа"),
 
@@ -115,7 +115,6 @@ export const WriteHistory:FC<WriteHistoryModal> = observer( ({nameShelter, show}
                     time: "",
                 }}
                         onSubmit={values => {
-                            console.log(values);
                             writeHistory(values);
                         }}
                         validationSchema={schemaHistory}

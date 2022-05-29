@@ -1,24 +1,17 @@
-.btn-medium {
-  max-width: 384px;
-  width: 100%;
-  height: 56px;
-  margin: 0px;
-  border: 0px;
-  border-radius: 50px;
-  font-weight: 500;
-  font-size: 16px;
-  cursor: pointer;
-}
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 1 | @import "src/app/styles/mixins.sass"
+ *   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *   '
+ *   ButtonMedium.sass 1:9  root stylesheet */
 
-.btn-medium:hover {
-  border: 3px solid #E0E0E0;
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import \"src/app/styles/mixins.sass\"\d\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   ButtonMedium.sass 1:9  root stylesheet";
 }
-
-@media screen and (max-width: 850px) {
-  .btn-medium {
-    max-width: 343px;
-    width: 100%;
-  }
-}
-
-/*# sourceMappingURL=ButtonMedium.css.map */

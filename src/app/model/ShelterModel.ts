@@ -5,4 +5,5 @@ export interface ShelterModel{
     address: string;
     image:string;
     phone: string;
+    rating: number;
 }

@@ -1,3 +1,6 @@
+@import "src/app/styles/mixins.sass"
+@import "src/app/styles/colors.sass"
+
 .home-page-body
   position: relative
   min-height: 100%
@@ -5,7 +8,7 @@
 .main-information-wrapper
   max-width: 1200px
   width: 100%
-  margin: 40px auto
+  margin: 50px auto 0
   display: flex
   align-items: center
   justify-content: space-between
@@ -18,13 +21,13 @@
     color: #19063D
 
     span
-      color: #EDB507
+      color: $c-yellow
 
   p
     font-weight: 400
     font-size: 18px
     line-height: 165%
-    color: rgba(0, 0, 0, 0.7)
+    color: $c-black-70
     margin-top: 32px
     margin-bottom: 32px
 
@@ -75,14 +78,14 @@
 
 
 
-@media screen and (max-width: 1250px)
+@include screenMax1250
   .main-information-wrapper
     max-width: 1100px
     width: 100%
 
 
 
-@media screen and (max-width: 1100px)
+@include screenMax1100
   .main-information-wrapper
     max-width: 900px
     width: 100%
@@ -111,7 +114,7 @@
       font-size: 15px
 
 
-@media screen and (max-width: 850px)
+@include screenMax850
   .main-information-wrapper
     max-width: 750px
     width: 100%
@@ -135,7 +138,7 @@
 
 
 
-@media screen and (max-width: 730px)
+@include screenMax730
   .main-information-wrapper
     max-width: 550px
     width: 100%
@@ -160,10 +163,9 @@
       display: none
 
 
-
-@media screen and (max-width: 500px)
+@include screenMax500
   .main-information-wrapper
     max-width: 400px
     width: 100%
 
-@media screen and (max-width: 375px)
+@include screenMax375

@@ -4,10 +4,12 @@ import {Stars} from "../../stars/Stars";
 
 
 interface Card{
+    id?: number;
     title:string;
     description:string;
     address: string;
     image:string;
+    rating?:any;
 }
 
 
@@ -33,7 +35,7 @@ export const Icon: FC<Props> = ({ name, height,width}) => {
     );
 }
 
-export const ShelterCard:FC<Card> = ({title,description,address,image}) =>{
+export const ShelterCard:FC<Card> = ({title,description,address,image, rating, id}) =>{
     return(
         <div className="card-wrapper">
             <div className="image-description">
@@ -44,7 +46,7 @@ export const ShelterCard:FC<Card> = ({title,description,address,image}) =>{
                         <h3>
                             {title}
                         </h3>
-                        <Stars/>
+                        <Stars ratingShelter={rating} id={id}/>
                     </div>
 
                     <p>
@@ -53,7 +55,6 @@ export const ShelterCard:FC<Card> = ({title,description,address,image}) =>{
 
                     <div className="address-wrapper">
                         <Icon name="map" height="16" width="16"/>
-
                         <p>{address}</p>
                     </div>
                 </div>
@@ -64,7 +65,9 @@ export const ShelterCard:FC<Card> = ({title,description,address,image}) =>{
                     </h3>
 
                     <div className="arrow-go">
-                        <Icon name="arrow-go" height="25" width="25"/>
+                        <button className="btn-arrow-go">
+                            <Icon name="arrow-go" height="14" width="14"/>
+                        </button>
                     </div>
                 </div>
             </div>

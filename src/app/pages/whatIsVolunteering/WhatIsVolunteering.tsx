@@ -57,7 +57,6 @@ export const WhatIsVolunteering = () =>{
                     </div>
                 </div>
             </div>
-            <Footer/>
         </>
     )
 }

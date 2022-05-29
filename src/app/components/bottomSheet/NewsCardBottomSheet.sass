@@ -1,3 +1,5 @@
+@import "src/app/styles/mixins.sass"
+
 .description-bottom-sheet
     width: 500px
     margin: 24px auto 0
@@ -18,7 +20,7 @@
   width: 384px
   margin: 0 auto
 
-@media screen and (max-width: 500px)
+@include screenMax500
   .description-bottom-sheet
     width: 343px
     margin: 24px auto 0
@@ -40,5 +42,4 @@
     margin: 0 auto
 
   [data-rsbs-footer]
-    padding: 0px
-    padding-bottom: 16px
+    padding: 0px 0px 16px

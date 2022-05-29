@@ -1,6 +1,9 @@
+@import "src/app/styles/mixins.sass"
+@import "src/app/styles/colors.sass"
+
 footer
   background: white
-  border-top: 1px solid #E0E0E0
+  border-top: 1px solid $c-light-grey
   width: 100%
   margin-top: 100px
   z-index: 2
@@ -18,9 +21,8 @@ footer
   align-items: center
 
   p
-    margin: 0px
     padding-bottom: 0px
-    margin-left: 10px
+    margin: 0px 0px 0px 10px
 
 .call
   margin-left: 32px
@@ -28,29 +30,27 @@ footer
   align-items: center
 
   p
-    margin: 0px
     padding-bottom: 0px
-    margin-left: 10px
+    margin: 0px 0px 0px 10px
 
-@media screen and (max-width: 1250px)
+@include screenMax1250
   .footer-wrapper
     max-width: 1100px
     width: 100%
 
-@media screen and (max-width: 1100px)
+@include screenMax1100
   .footer-wrapper
     max-width: 900px
     width: 100%
 
 
-
-@media screen and (max-width: 850px)
+@include screenMax850
   .footer-wrapper
     max-width: 750px
     width: 100%
 
 
-@media screen and (max-width: 730px)
+@include screenMax730
   .footer-wrapper
     max-width: 550px
     width: 100%
@@ -63,16 +63,17 @@ footer
       margin-top: 12px
       margin-left: 0px
 
-@media screen and (max-width: 500px)
-  .footer-wrapper
-    max-width: 400px
-    width: 100%
+@include screenMax500
 
-@media screen and (max-width: 375px)
-  .footer-wrapper
-    max-width: 343px
-    width: 100%
-    margin: 0px auto
+    .footer-wrapper
+      max-width: 400px
+      width: 100%
+
+@include screenMax375
+    .footer-wrapper
+      max-width: 343px
+      width: 100%
+      margin: 0px auto
 
 
 

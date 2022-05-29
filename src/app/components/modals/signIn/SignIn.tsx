@@ -102,7 +102,6 @@ export const SignIn = observer( () =>{
                 password: ""
             }}
                     onSubmit={values => {
-                        console.log(values)
                         handleSignIn(values);
                     }}
                     validationSchema={signInSchema}
@@ -145,6 +144,7 @@ export const SignIn = observer( () =>{
                             </form>
                         </div>
                         <div className="link-wrapper">
+                            <p>Не зарегистрированы?</p>
                             <button className="btn-as-link" onClick={onRegistration}>
                                 Регистрация
                             </button>

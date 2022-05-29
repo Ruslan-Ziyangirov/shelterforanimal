@@ -1,32 +1,17 @@
-.profile-wrapper-skeleton {
-  display: flex;
-  justify-content: space-between;
-}
-.profile-wrapper-skeleton .profile-information-skeleton {
-  border-radius: 20px;
-  max-width: 480px;
-  width: 100%;
-  border: 1px solid #dadada;
-  padding: 16px;
-}
-.profile-wrapper-skeleton .profile-information-skeleton .img-profile-skeleton {
-  width: 128px;
-  margin: 0 auto;
-}
-.profile-wrapper-skeleton .profile-information-skeleton .additional-profile-skeleton {
-  margin: 0 auto;
-  margin-top: 24px;
-  width: 140px;
-  text-align: center;
-}
-.profile-wrapper-skeleton .profile-information-skeleton .buttons-skeleton {
-  width: 372px;
-  margin: 24px auto 0px;
-  align-items: center;
-}
-.profile-wrapper-skeleton .profile-information-skeleton .buttons-skeleton .mini-button {
-  width: 100px;
-  margin: 16px auto 0;
-}
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 1 | @import "src/app/styles/colors"
+ *   |         ^^^^^^^^^^^^^^^^^^^^^^^
+ *   '
+ *   SheltersProfilePage.sass 1:9  root stylesheet */
 
-/*# sourceMappingURL=SheltersProfilePage.css.map */
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import \"src/app/styles/colors\"\d\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   SheltersProfilePage.sass 1:9  root stylesheet";
+}

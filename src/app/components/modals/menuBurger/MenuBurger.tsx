@@ -4,10 +4,12 @@ import {Modal} from "../modal";
 import profile from "../../../../assets/user.png";
 import {Link} from "react-router-dom";
 import {ButtonSmall} from "../../ui/buttons/small/ButtonSmall";
-import {useAuth} from "../../../config/firebase";
+import {database, getProfile, useAuth} from "../../../config/firebase";
 import {SignIn} from "../signIn/SignIn";
-import {FC} from "react";
+import {FC, useEffect, useState} from "react";
 import "./MenuBurger.sass"
+import {getAuth, onAuthStateChanged} from "@firebase/auth";
+import {collection, getDocs} from "firebase/firestore";
 
 interface Props{
     name:string,
@@ -37,6 +39,7 @@ export const MenuBurger = observer(() =>{
 
     const { modalStore: {clearCurrentModal, setCurrentModal} } = useStores();
 
+
     const onCloseMenu = () => {
         clearCurrentModal();
     };
@@ -46,6 +49,34 @@ export const MenuBurger = observer(() =>{
     const onOpenModal = () =>{
         setCurrentModal(SignIn);
     }
+
+    const auth = getAuth();
+    let uid = "";
+
+    const [usersInfo, setUsersInfo] = useState<any>([]);
+    const usersDatabaseRef = collection(database, 'profile');
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            uid = user.uid;
+        } else {
+            console.log("Пользователь почему-то не авторизован")
+        }
+    });
+
+    useEffect(() => {
+        const getUserInfo = async () => {
+            const data = await getDocs(usersDatabaseRef);
+            let arr = data.docs.map((doc) => ({...doc.data()}))
+            let user = arr.findIndex(function (user,index){
+                return user.uid === uid
+            })
+
+            let ans = arr[user]
+            setUsersInfo(ans)
+        };
+        getUserInfo().then();
+    }, [])
 
 
     return (
@@ -59,8 +90,8 @@ export const MenuBurger = observer(() =>{
 
                         <div className="profile-menu-burger">
                             { user ? <div className="profile-header-burger">
-                                    <img src={profile}/>
-                                    <Link to="/profile" onClick={onCloseMenu}>{user.email}</Link>
+                                    <img src={usersInfo.photoURL}/>
+                                    <Link to="/profile" onClick={onCloseMenu}>{usersInfo.name}</Link>
                                 </div> :
                                 <ButtonSmall title={"Войти"} border={"1px solid #713EDD"} onClick={onOpenModal} />
                             }
