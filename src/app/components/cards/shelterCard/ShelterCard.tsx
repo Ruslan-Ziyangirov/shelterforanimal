@@ -10,6 +10,8 @@ interface Card{
     address: string;
     image:string;
     rating?:any;
+    shortName:string;
+    numberOfVoters: number;
 }
 
 
@@ -35,7 +37,7 @@ export const Icon: FC<Props> = ({ name, height,width}) => {
     );
 }
 
-export const ShelterCard:FC<Card> = ({title,description,address,image, rating, id}) =>{
+export const ShelterCard:FC<Card> = ({title,description,address,image, rating, shortName,numberOfVoters}) =>{
     return(
         <div className="card-wrapper">
             <div className="image-description">
@@ -46,7 +48,7 @@ export const ShelterCard:FC<Card> = ({title,description,address,image, rating, i
                         <h3>
                             {title}
                         </h3>
-                        <Stars ratingShelter={rating} id={id}/>
+                        <Stars ratingShelter={rating} shortNameDoc={shortName} numberOfVoters={numberOfVoters}/>
                     </div>
 
                     <p>
