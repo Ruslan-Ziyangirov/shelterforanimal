@@ -50,6 +50,8 @@ export const ShelterPage = () =>{
                                                          address={shelter.address}
                                                          image={shelter.image}
                                                          rating={shelter.rating}
+                                                         shortName={shelter.shortName}
+                                                         numberOfVoters={shelter.numberOfVoters}
                                             />
                                         </Link>
 

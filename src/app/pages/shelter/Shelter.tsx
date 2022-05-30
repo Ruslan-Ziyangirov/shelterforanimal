@@ -90,7 +90,9 @@ export const Shelter = observer(() =>{
                             <h3>
                                 {shelterInformation.title}
                             </h3>
-                            <Stars ratingShelter={shelterInformation.rating}/>
+                            <Stars ratingShelter={shelterInformation.rating}
+                                   shortNameDoc={shelterInformation.shortName}
+                                   numberOfVoters={shelterInformation.numberOfVoters}/>
                         </div>
                         <p className="description-shelter">
                             {shelterInformation.description}

@@ -2,16 +2,14 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {database, logOut, useAuth} from "../../config/firebase";
 import "./Profile.sass"
-import avatar from "../../../assets/dog shelter.png"
 import {ButtonMedium} from "../../components/ui/buttons/medium/ButtonMedium";
 import {VisitCard} from "../../components/cards/visitCard/VisitCard";
-import {collection, doc, getDocs, query, updateDoc, where} from "firebase/firestore";
+import {collection, doc, getDocs} from "firebase/firestore";
 import {observer} from "mobx-react";
 import {getAuth, onAuthStateChanged} from "@firebase/auth";
-import test from "../../../assets/1920x1200_1388552_[www.ArtFile.ru].jpg"
 import {toast} from "react-toastify";
-import {SkeletonSheltersPage} from "../../components/aimation/skeleton/skeletonSheltersPage/SkeletonSheltersPage";
 import {SkeletonProfilePage} from "../../components/aimation/skeleton/skeletonProfilePage/SkeletonProfilePage";
+import "firebase/compat/storage";
 
 
 export const Profile = observer(() =>{
@@ -23,7 +21,9 @@ export const Profile = observer(() =>{
     let router = useNavigate()
     const auth = getAuth();
 
-    const [file, setFile] = useState('');
+    const [file, setFile] = useState(null);
+    const [url, setURL] = useState("");
+
     const [loading, setLoading] = useState(false);
     const [usersInfo, setUsersInfo] = useState<any>([]);
     const [visitHistory, setVisitHistory] = useState<any>([]);
@@ -74,22 +74,10 @@ export const Profile = observer(() =>{
         return () => clearTimeout(timing);
     }, []);
 
-    function handleChange(e: any) {
-        if (e.target.files[0]) {
-            setFile(URL.createObjectURL(e.target.files[0]));
-        }
-        console.log(file)
-    }
 
     const profileDocRef = doc(database, 'profile', "IRP8twdILbz5XYIJ3gmc");
 
 
-    const updatePhoto = async () =>{
-        console.log(file + " фото юрл ")
-        await updateDoc(profileDocRef, {
-            "photoURL": test,
-        });
-    }
 
 
     useEffect(() => {
@@ -137,12 +125,13 @@ export const Profile = observer(() =>{
                             <p>
                                 {usersInfo.email}
                             </p>
-                            <input type="file" className="upload-file" multiple={true} onChange={handleChange}/>
-                            <ButtonMedium title={"Поменять фото"}
-                                          background={"#713EDD"}
-                                          color={"white"}
-                                          onClick={updatePhoto}
-                            />
+                            <form>
+                                <input type="file" className="upload-file" multiple={true} />
+                                <ButtonMedium title={"Поменять фото"}
+                                              background={"#713EDD"}
+                                              color={"white"}
+                                />
+                            </form>
                             <button disabled={loading || !currentUser}
                                     onClick={handleLogout} className="output">
                                 Выйти

@@ -6,4 +6,6 @@ export interface ShelterModel{
     image:string;
     phone: string;
     rating: number;
+    shortName:string;
+    numberOfVoters: number;
 }

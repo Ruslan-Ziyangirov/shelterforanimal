@@ -12,6 +12,7 @@ import {
 import {addDoc, collection, getDocs, getFirestore} from 'firebase/firestore';
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 import {useEffect, useState} from "react";
+import firebase from "firebase/compat";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDtnxlXITLyZMapzZvle6MxzUDIIQ3xbMw",
@@ -25,7 +26,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
-const storage = getStorage()
+export const storage = getStorage();
 export const database = getFirestore(app);
 const usersDatabaseRef = collection(database, 'profile');
 const historyDatabaseRef = collection(database, 'history');
