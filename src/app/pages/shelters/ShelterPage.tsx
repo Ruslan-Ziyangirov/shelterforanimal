@@ -43,20 +43,22 @@ export const ShelterPage = () =>{
                             <img className="dog-shelter" src={dogShelter}/>
 
                             <div className="shelter-list">
-                                {sheltersInfo.map((shelter: any) => (
-                                        <Link className="btn-shelter" to={`/shelters/${shelter.id}`}>
-                                            <ShelterCard title={shelter.title}
-                                                         description={shelter.description}
-                                                         address={shelter.address}
-                                                         image={shelter.image}
-                                                         rating={shelter.rating}
-                                                         shortName={shelter.shortName}
-                                                         numberOfVoters={shelter.numberOfVoters}
-                                            />
-                                        </Link>
+                                <div className="shelter-list-wrapper">
+                                    {sheltersInfo.map((shelter: any) => (
+                                            <Link className="btn-shelter" to={`/shelters/${shelter.id}`}>
+                                                <ShelterCard title={shelter.title}
+                                                             description={shelter.description}
+                                                             address={shelter.address}
+                                                             image={shelter.image}
+                                                             rating={shelter.rating}
+                                                             shortName={shelter.shortName}
+                                                             numberOfVoters={shelter.numberOfVoters}
+                                                />
+                                            </Link>
 
-                                    )
-                                )}
+                                        )
+                                    )}
+                                </div>
                             </div>
                         </>
 

@@ -2,16 +2,15 @@
 @import "src/app/styles/colors.sass"
 
 .home-page-body
-  position: relative
-  min-height: 100%
+
 
 .main-information-wrapper
   max-width: 1200px
   width: 100%
-  margin: 50px auto 0
   display: flex
   align-items: center
   justify-content: space-between
+  margin: 50px auto 100px
 
   h1
     font-weight: 700
@@ -87,8 +86,10 @@
 
 @include screenMax1100
   .main-information-wrapper
+    margin-top: 100px
     max-width: 900px
     width: 100%
+    margin-bottom: 100px
 
     h1
       font-size: 40px
@@ -118,7 +119,8 @@
   .main-information-wrapper
     max-width: 750px
     width: 100%
-    margin-top: 64px
+    margin-top: 100px
+    margin-bottom: 150px
 
     h1
       font-size: 36px
@@ -165,7 +167,16 @@
 
 @include screenMax500
   .main-information-wrapper
+    margin-top: 150px
     max-width: 400px
     width: 100%
+    margin-bottom: 180px
+
 
 @include screenMax375
+  .main-information-wrapper
+    margin-top: 100px
+    margin-bottom: 100px
+    max-width: 343px
+    width: 100%
+
