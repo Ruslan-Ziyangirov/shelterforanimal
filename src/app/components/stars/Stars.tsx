@@ -3,7 +3,7 @@ import "./Stars.sass"
 import { FaStar } from  "react-icons/fa"
 import {a} from "@react-spring/web";
 import {collection, doc, updateDoc} from "firebase/firestore";
-import {database} from "../../config/firebase";
+import {database, signIn} from "../../config/firebase";
 import {toast} from "react-toastify";
 
 interface Star {
@@ -30,21 +30,35 @@ export const Stars: FC<Star> = ({ratingShelter, shortNameDoc, numberOfVoters}) =
 
         console.log("Приравнял к целому числу: " + Math.round(average))
 
-        await updateDoc(shelterDocRef, {
-            "rating": Math.round(average),
-            "numberOfVoters": newCountNumberOfVotes
-        });
+        try {
+            await updateDoc(shelterDocRef, {
+                "rating": Math.round(average),
+                "numberOfVoters": newCountNumberOfVotes
+            });
 
-        toast('Спасибо, ваш отзыв учтен!', {
-            position: 'top-right',
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            type: 'success',
-            draggable: true,
-            progress: undefined,
-        })
+            toast('Спасибо, ваш отзыв учтен!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                type: 'success',
+                draggable: true,
+                progress: undefined,
+            })
+        } catch {
+            toast('Сначала нужно авторизоваться!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                type: 'error',
+                draggable: true,
+                progress: undefined,
+            })
+        }
+
     }
 
     return(

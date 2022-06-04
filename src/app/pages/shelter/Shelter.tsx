@@ -3,13 +3,14 @@ import {FC, useEffect, useState} from "react";
 import "./Shelter.sass"
 import {Footer} from "../../components/footer/Footer";
 import {collection, getDocs} from "firebase/firestore";
-import {database} from "../../config/firebase";
+import {database, useAuth} from "../../config/firebase";
 import {observer} from "mobx-react";
 import {useStores} from "../../../utils/use-stores-hook";
 import {useNavigate, useParams} from "react-router-dom";
 import {ShelterModel} from "../../model/ShelterModel";
 import {WriteHistory} from "../../components/modals/writeHistory/WriteHistory";
 import inst from "../../../assets/instagram-icon.png";
+import {toast} from "react-toastify";
 
 interface Props{
     name:string,
@@ -41,6 +42,7 @@ export const Shelter = observer(() =>{
     const [sheltersInfo, setShelterInfo] = useState<any>([]);
     const [shelterInformation, setShelterInformation] = useState<ShelterModel>();
     const [showModal, setShowModal] = useState(false);
+    const user = useAuth();
     const {id}: Readonly<any> = useParams();
     let router = useNavigate()
 
@@ -65,6 +67,23 @@ export const Shelter = observer(() =>{
 
     const onComeBack = () =>{
         router('/shelters')
+    }
+
+    const onUserActive = () =>{
+        if(user){
+            onOpenModal()
+        }else{
+            toast('Сначала нужно авторизоваться!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                type: 'error',
+                draggable: true,
+                progress: undefined,
+            })
+        }
     }
 
 
@@ -99,7 +118,8 @@ export const Shelter = observer(() =>{
                         </p>
 
                         <div className="additional-information-wrapper">
-                            <button className="submit" onClick={onOpenModal}>
+
+                            <button className="submit" onClick={onUserActive}>
                                 Оставить заявку
                             </button>
 
