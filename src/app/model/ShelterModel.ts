@@ -8,4 +8,5 @@ export interface ShelterModel{
     rating: number;
     shortName:string;
     numberOfVoters: number;
+    vk: string;
 }

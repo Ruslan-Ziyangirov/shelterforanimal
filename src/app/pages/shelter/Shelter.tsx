@@ -6,7 +6,7 @@ import {collection, getDocs} from "firebase/firestore";
 import {database, useAuth} from "../../config/firebase";
 import {observer} from "mobx-react";
 import {useStores} from "../../../utils/use-stores-hook";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {ShelterModel} from "../../model/ShelterModel";
 import {WriteHistory} from "../../components/modals/writeHistory/WriteHistory";
 import inst from "../../../assets/instagram-icon.png";
@@ -135,7 +135,9 @@ export const Shelter = observer(() =>{
                                     <p>
                                         {shelterInformation.phone}
                                     </p>
-                                    <Icon name={"vk"} height={24} width={24}/>
+                                    <a href={shelterInformation.vk}>
+                                        <Icon name={"vk"} height={24} width={24}/>
+                                    </a>
                                     <img src={inst} className="inst"/>
                                 </div>
                             </div>
